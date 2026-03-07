@@ -12,6 +12,8 @@ import (
 	"net/url"
 	"strings"
 	"time"
+
+	"github.com/grokify/mogo/net/http/httputilmore"
 )
 
 // OAuth 2.0 error codes per RFC 6749
@@ -262,8 +264,8 @@ func (s *Server) handleAuthorizationGet(w http.ResponseWriter, r *http.Request) 
 
 // handleAuthorizationPost processes the login form submission.
 func (s *Server) handleAuthorizationPost(w http.ResponseWriter, r *http.Request) {
-	// Limit request body to 1MB to prevent memory exhaustion
-	r.Body = http.MaxBytesReader(w, r.Body, 1<<20)
+	// Limit request body to 1MB to prevent memory exhaustion (G120)
+	httputilmore.LimitRequestBody(w, r, httputilmore.DefaultMaxBodySize)
 	if err := r.ParseForm(); err != nil {
 		s.renderLoginError(w, "Failed to parse form")
 		return
@@ -370,8 +372,8 @@ func (s *Server) tokenHandler() http.Handler {
 			return
 		}
 
-		// Limit request body to 1MB to prevent memory exhaustion
-		r.Body = http.MaxBytesReader(w, r.Body, 1<<20)
+		// Limit request body to 1MB to prevent memory exhaustion (G120)
+		httputilmore.LimitRequestBody(w, r, httputilmore.DefaultMaxBodySize)
 		if err := r.ParseForm(); err != nil {
 			s.logDebug("token error: failed to parse form", "error", err)
 			writeOAuthError(w, http.StatusBadRequest, ErrorInvalidRequest, "Failed to parse form")
