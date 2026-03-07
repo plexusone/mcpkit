@@ -1,107 +1,127 @@
 {
-  "ir_version": "1.0",
+  "irVersion": "1.0",
   "project": "mcpkit",
-  "repository": "https://github.com/agentplexus/mcpkit",
+  "repository": "https://github.com/plexusone/mcpkit",
   "versioning": "semver",
-  "commit_convention": "conventional",
-  "maintainers": ["agentplexus"],
+  "commitConvention": "conventional",
+  "maintainers": ["plexusone"],
   "releases": [
+    {
+      "version": "v0.4.0",
+      "date": "2026-03-07",
+      "highlights": [
+        { "description": "Organization renamed from agentplexus to plexusone" },
+        { "description": "Changelog format updated to camelCase for ecosystem consistency" }
+      ],
+      "breaking": [
+        { "description": "Module path changed from `github.com/agentplexus/mcpkit` to `github.com/plexusone/mcpkit`" }
+      ],
+      "upgradeGuide": [
+        { "description": "Update imports: replace `github.com/agentplexus/mcpkit` with `github.com/plexusone/mcpkit`" },
+        { "description": "Run `go mod tidy` to update dependencies" }
+      ],
+      "changed": [
+        { "description": "All package imports updated to `github.com/plexusone/mcpkit`" },
+        { "description": "Documentation and badge URLs updated to plexusone organization" },
+        { "description": "Changelog JSON format migrated from snake_case to camelCase" }
+      ]
+    },
     {
       "version": "v0.3.1",
       "date": "2026-01-18",
       "highlights": [
-        {"description": "Security fix for open URL redirect vulnerability in OAuth2 server"}
+        { "description": "Security fix for open URL redirect vulnerability in OAuth2 server" }
       ],
       "security": [
-        {"description": "Close open URL redirect vulnerability in `isValidRedirectURI` - wildcards no longer allow arbitrary redirect URIs", "commit": "edac011"}
+        { "description": "Close open URL redirect vulnerability in `isValidRedirectURI` - wildcards no longer allow arbitrary redirect URIs", "commit": "edac011" }
       ],
       "fixed": [
-        {"description": "OAuth2 redirect URI validation now properly parses and validates URIs structurally", "commit": "edac011"}
+        { "description": "OAuth2 redirect URI validation now properly parses and validates URIs structurally", "commit": "edac011" }
       ]
     },
     {
       "version": "v0.3.0",
       "date": "2026-01-18",
       "highlights": [
-        {"description": "Project renamed to MCPKit under github.com/agentplexus/mcpkit"},
-        {"description": "Restructured into focused subpackages: `runtime/` and `oauth2/`"},
-        {"description": "Improved error handling following Go best practices"}
+        { "description": "Project renamed to MCPKit under github.com/plexusone/mcpkit" },
+        { "description": "Restructured into focused subpackages: `runtime/` and `oauth2/`" },
+        { "description": "Improved error handling following Go best practices" }
       ],
       "changed": [
-        {"description": "Module path changed from `github.com/grokify/mcpruntime` to `github.com/agentplexus/mcpkit`", "commit": "692c7c7"},
-        {"description": "Core runtime code moved to `runtime/` subpackage - import `github.com/agentplexus/mcpkit/runtime`", "commit": "298f19b"},
-        {"description": "OAuth2 server moved from `oauth2server/` to `oauth2/` - import `github.com/agentplexus/mcpkit/oauth2`", "commit": "298f19b"},
-        {"description": "Package references changed from `mcpkit.` to `runtime.` for runtime types", "commit": "298f19b"}
+        { "description": "Module path changed from `github.com/grokify/mcpruntime` to `github.com/plexusone/mcpkit`", "commit": "692c7c7" },
+        { "description": "Core runtime code moved to `runtime/` subpackage - import `github.com/plexusone/mcpkit/runtime`", "commit": "298f19b" },
+        { "description": "OAuth2 server moved from `oauth2server/` to `oauth2/` - import `github.com/plexusone/mcpkit/oauth2`", "commit": "298f19b" },
+        { "description": "Package references changed from `mcpkit.` to `runtime.` for runtime types", "commit": "298f19b" }
       ],
       "fixed": [
-        {"description": "Error handling for `fmt.Fprintf` in OAuth login error page", "commit": "692c7c7"},
-        {"description": "Error handling for `resp.Body.Close()` in all test files", "commit": "692c7c7"}
+        { "description": "Error handling for `fmt.Fprintf` in OAuth login error page", "commit": "692c7c7" },
+        { "description": "Error handling for `resp.Body.Close()` in all test files", "commit": "692c7c7" }
       ],
       "breaking": [
-        {"description": "Import path changed: update `github.com/grokify/mcpruntime` to `github.com/agentplexus/mcpkit/runtime`", "commit": "298f19b"},
-        {"description": "Package name changed: update `mcpruntime.` or `mcpkit.` references to `runtime.`", "commit": "298f19b"},
-        {"description": "OAuth2 server import path changed: update `oauth2server` to `github.com/agentplexus/mcpkit/oauth2`", "commit": "298f19b"}
+        { "description": "Import path changed: update `github.com/grokify/mcpruntime` to `github.com/plexusone/mcpkit/runtime`", "commit": "298f19b" },
+        { "description": "Package name changed: update `mcpruntime.` or `mcpkit.` references to `runtime.`", "commit": "298f19b" },
+        { "description": "OAuth2 server import path changed: update `oauth2server` to `github.com/plexusone/mcpkit/oauth2`", "commit": "298f19b" }
       ]
     },
     {
       "version": "v0.2.0",
       "date": "2026-01-11",
       "highlights": [
-        {"description": "OAuth 2.1 Authorization Code + PKCE support for ChatGPT.com and other MCP clients requiring user authentication"},
-        {"description": "HTTP server mode with optional ngrok tunnel for public URL exposure"},
-        {"description": "Bearer token authentication for protecting MCP endpoints"}
+        { "description": "OAuth 2.1 Authorization Code + PKCE support for ChatGPT.com and other MCP clients requiring user authentication" },
+        { "description": "HTTP server mode with optional ngrok tunnel for public URL exposure" },
+        { "description": "Bearer token authentication for protecting MCP endpoints" }
       ],
       "added": [
-        {"description": "`ServeHTTP()` method for HTTP transport with graceful shutdown", "commit": "bb710f5"},
-        {"description": "`NgrokOptions` for automatic ngrok tunnel creation with custom domain support", "commit": "bb710f5"},
-        {"description": "`OAuth2Options` for OAuth 2.1 Authorization Code + PKCE authentication", "commit": "bb710f5"},
-        {"description": "`oauth2server` package implementing RFC 7636 (PKCE), RFC 7591 (DCR), RFC 8414, RFC 9728", "commit": "bb710f5"},
-        {"description": "Bearer token authentication middleware for protected MCP endpoints", "commit": "bb710f5"},
-        {"description": "`HTTPServerResult` with local and public URLs plus OAuth credentials", "commit": "bb710f5"},
-        {"description": "`OnReady` callback in `HTTPServerOptions` for server lifecycle events", "commit": "bb710f5"}
+        { "description": "`ServeHTTP()` method for HTTP transport with graceful shutdown", "commit": "bb710f5" },
+        { "description": "`NgrokOptions` for automatic ngrok tunnel creation with custom domain support", "commit": "bb710f5" },
+        { "description": "`OAuth2Options` for OAuth 2.1 Authorization Code + PKCE authentication", "commit": "bb710f5" },
+        { "description": "`oauth2server` package implementing RFC 7636 (PKCE), RFC 7591 (DCR), RFC 8414, RFC 9728", "commit": "bb710f5" },
+        { "description": "Bearer token authentication middleware for protected MCP endpoints", "commit": "bb710f5" },
+        { "description": "`HTTPServerResult` with local and public URLs plus OAuth credentials", "commit": "bb710f5" },
+        { "description": "`OnReady` callback in `HTTPServerOptions` for server lifecycle events", "commit": "bb710f5" }
       ],
       "deprecated": [
-        {"description": "`OAuthOptions` (client_credentials only) in favor of `OAuth2Options` with full OAuth 2.1 PKCE support", "commit": "bb710f5"}
+        { "description": "`OAuthOptions` (client_credentials only) in favor of `OAuth2Options` with full OAuth 2.1 PKCE support", "commit": "bb710f5" }
       ]
     },
     {
       "version": "v0.1.0",
       "date": "2026-01-10",
       "highlights": [
-        {"description": "Library-first MCP runtime: define tools, prompts, and resources once, invoke them directly as Go functions or expose over MCP transports"},
-        {"description": "Zero JSON-RPC overhead in library mode for unit testing, embedding, and serverless use cases"},
-        {"description": "Full MCP SDK compatibility with escape hatch for advanced features"}
+        { "description": "Library-first MCP runtime: define tools, prompts, and resources once, invoke them directly as Go functions or expose over MCP transports" },
+        { "description": "Zero JSON-RPC overhead in library mode for unit testing, embedding, and serverless use cases" },
+        { "description": "Full MCP SDK compatibility with escape hatch for advanced features" }
       ],
       "added": [
-        {"description": "`Runtime` type wrapping `mcp.Server` with dual execution modes (library and server)", "commit": "1e973a1"},
-        {"description": "`New()` constructor with `Options` for runtime configuration", "commit": "1e973a1"},
-        {"description": "`MCPServer()` escape hatch for advanced MCP SDK access", "commit": "1e973a1"},
-        {"description": "`Implementation()` getter for server identity", "commit": "1e973a1"},
-        {"description": "`AddTool[In, Out]()` generic helper with automatic schema inference", "commit": "f7b0c03"},
-        {"description": "`AddToolHandler()` low-level tool registration", "commit": "f7b0c03"},
-        {"description": "`CallTool()` for library-mode direct invocation", "commit": "1e973a1"},
-        {"description": "`RemoveTools()`, `ListTools()`, `HasTool()`, `ToolCount()` tool management methods", "commit": "1e973a1"},
-        {"description": "`AddPrompt()` for prompt registration", "commit": "2f85413"},
-        {"description": "`GetPrompt()` for library-mode direct invocation", "commit": "2f85413"},
-        {"description": "`RemovePrompts()`, `ListPrompts()`, `HasPrompt()`, `PromptCount()` prompt management methods", "commit": "2f85413"},
-        {"description": "`AddResource()` for static resource registration", "commit": "a7e7816"},
-        {"description": "`AddResourceTemplate()` for dynamic URI template resources (server mode only)", "commit": "a7e7816"},
-        {"description": "`ReadResource()` for library-mode direct invocation", "commit": "a7e7816"},
-        {"description": "`RemoveResources()`, `RemoveResourceTemplates()` resource removal methods", "commit": "a7e7816"},
-        {"description": "`ListResources()`, `HasResource()`, `ResourceCount()` resource management methods", "commit": "a7e7816"},
-        {"description": "`ServeStdio()` for stdio transport (subprocess mode)", "commit": "d9ed342"},
-        {"description": "`ServeIO()` for custom IO streams", "commit": "d9ed342"},
-        {"description": "`Serve()` for custom MCP transports", "commit": "d9ed342"},
-        {"description": "`Connect()` for session-based connections", "commit": "d9ed342"},
-        {"description": "`StreamableHTTPHandler()` for HTTP/SSE transport", "commit": "d9ed342"},
-        {"description": "`SSEHandler()` for legacy SSE transport", "commit": "d9ed342"},
-        {"description": "`InMemorySession()` for testing with full MCP semantics", "commit": "d9ed342"}
+        { "description": "`Runtime` type wrapping `mcp.Server` with dual execution modes (library and server)", "commit": "1e973a1" },
+        { "description": "`New()` constructor with `Options` for runtime configuration", "commit": "1e973a1" },
+        { "description": "`MCPServer()` escape hatch for advanced MCP SDK access", "commit": "1e973a1" },
+        { "description": "`Implementation()` getter for server identity", "commit": "1e973a1" },
+        { "description": "`AddTool[In, Out]()` generic helper with automatic schema inference", "commit": "f7b0c03" },
+        { "description": "`AddToolHandler()` low-level tool registration", "commit": "f7b0c03" },
+        { "description": "`CallTool()` for library-mode direct invocation", "commit": "1e973a1" },
+        { "description": "`RemoveTools()`, `ListTools()`, `HasTool()`, `ToolCount()` tool management methods", "commit": "1e973a1" },
+        { "description": "`AddPrompt()` for prompt registration", "commit": "2f85413" },
+        { "description": "`GetPrompt()` for library-mode direct invocation", "commit": "2f85413" },
+        { "description": "`RemovePrompts()`, `ListPrompts()`, `HasPrompt()`, `PromptCount()` prompt management methods", "commit": "2f85413" },
+        { "description": "`AddResource()` for static resource registration", "commit": "a7e7816" },
+        { "description": "`AddResourceTemplate()` for dynamic URI template resources (server mode only)", "commit": "a7e7816" },
+        { "description": "`ReadResource()` for library-mode direct invocation", "commit": "a7e7816" },
+        { "description": "`RemoveResources()`, `RemoveResourceTemplates()` resource removal methods", "commit": "a7e7816" },
+        { "description": "`ListResources()`, `HasResource()`, `ResourceCount()` resource management methods", "commit": "a7e7816" },
+        { "description": "`ServeStdio()` for stdio transport (subprocess mode)", "commit": "d9ed342" },
+        { "description": "`ServeIO()` for custom IO streams", "commit": "d9ed342" },
+        { "description": "`Serve()` for custom MCP transports", "commit": "d9ed342" },
+        { "description": "`Connect()` for session-based connections", "commit": "d9ed342" },
+        { "description": "`StreamableHTTPHandler()` for HTTP/SSE transport", "commit": "d9ed342" },
+        { "description": "`SSEHandler()` for legacy SSE transport", "commit": "d9ed342" },
+        { "description": "`InMemorySession()` for testing with full MCP semantics", "commit": "d9ed342" }
       ],
       "documentation": [
-        {"description": "Comprehensive README with library and server mode examples", "commit": "9d08047"},
-        {"description": "Feature comparison matrix (library vs server mode)", "commit": "9d08047"},
-        {"description": "MCP feature adoption guidance", "commit": "9d08047"},
-        {"description": "Full API reference documentation", "commit": "9d08047"}
+        { "description": "Comprehensive README with library and server mode examples", "commit": "9d08047" },
+        { "description": "Feature comparison matrix (library vs server mode)", "commit": "9d08047" },
+        { "description": "MCP feature adoption guidance", "commit": "9d08047" },
+        { "description": "Full API reference documentation", "commit": "9d08047" }
       ]
     }
   ]
