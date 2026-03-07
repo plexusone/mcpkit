@@ -265,21 +265,21 @@ func (s *Server) handleAuthorizationGet(w http.ResponseWriter, r *http.Request) 
 // handleAuthorizationPost processes the login form submission.
 func (s *Server) handleAuthorizationPost(w http.ResponseWriter, r *http.Request) {
 	// Limit request body to 1MB to prevent memory exhaustion (G120)
-	httputilmore.LimitRequestBody(w, r, httputilmore.DefaultMaxBodySize)
+	r.Body = http.MaxBytesReader(w, r.Body, httputilmore.DefaultMaxBodySize)
 	if err := r.ParseForm(); err != nil {
 		s.renderLoginError(w, "Failed to parse form")
 		return
 	}
 
-	// Get form values
-	username := r.FormValue("username")
-	password := r.FormValue("password")
-	clientID := r.FormValue("client_id")
-	redirectURI := r.FormValue("redirect_uri")
-	state := r.FormValue("state")
-	scope := r.FormValue("scope")
-	codeChallenge := r.FormValue("code_challenge")
-	codeChallengeMethod := r.FormValue("code_challenge_method")
+	// Get form values (use r.Form.Get after ParseForm to avoid G120 false positives)
+	username := r.Form.Get("username")
+	password := r.Form.Get("password")
+	clientID := r.Form.Get("client_id")
+	redirectURI := r.Form.Get("redirect_uri")
+	state := r.Form.Get("state")
+	scope := r.Form.Get("scope")
+	codeChallenge := r.Form.Get("code_challenge")
+	codeChallengeMethod := r.Form.Get("code_challenge_method")
 
 	// Validate client exists
 	client, err := s.storage.GetClient(clientID)
@@ -373,28 +373,28 @@ func (s *Server) tokenHandler() http.Handler {
 		}
 
 		// Limit request body to 1MB to prevent memory exhaustion (G120)
-		httputilmore.LimitRequestBody(w, r, httputilmore.DefaultMaxBodySize)
+		r.Body = http.MaxBytesReader(w, r.Body, httputilmore.DefaultMaxBodySize)
 		if err := r.ParseForm(); err != nil {
 			s.logDebug("token error: failed to parse form", "error", err)
 			writeOAuthError(w, http.StatusBadRequest, ErrorInvalidRequest, "Failed to parse form")
 			return
 		}
 
-		// Parse token request
+		// Parse token request (use r.Form.Get after ParseForm to avoid G120 false positives)
 		req := &TokenRequest{
-			GrantType:    r.FormValue("grant_type"),
-			Code:         r.FormValue("code"),
-			RedirectURI:  r.FormValue("redirect_uri"),
-			CodeVerifier: r.FormValue("code_verifier"),
-			RefreshToken: r.FormValue("refresh_token"),
-			Scope:        r.FormValue("scope"),
+			GrantType:    r.Form.Get("grant_type"),
+			Code:         r.Form.Get("code"),
+			RedirectURI:  r.Form.Get("redirect_uri"),
+			CodeVerifier: r.Form.Get("code_verifier"),
+			RefreshToken: r.Form.Get("refresh_token"),
+			Scope:        r.Form.Get("scope"),
 		}
 
 		// Get client credentials from Basic auth or form body
 		req.ClientID, req.ClientSecret, _ = r.BasicAuth()
 		if req.ClientID == "" {
-			req.ClientID = r.FormValue("client_id")
-			req.ClientSecret = r.FormValue("client_secret")
+			req.ClientID = r.Form.Get("client_id")
+			req.ClientSecret = r.Form.Get("client_secret")
 		}
 
 		s.logDebug("token request parsed",

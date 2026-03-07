@@ -140,14 +140,15 @@ func (s *oauthServer) TokenHandler() http.Handler {
 			return
 		}
 
-		// Parse form data
+		// Limit request body to 1MB and parse form data (G120)
+		r.Body = http.MaxBytesReader(w, r.Body, 1<<20)
 		if err := r.ParseForm(); err != nil {
 			s.writeError(w, http.StatusBadRequest, "invalid_request", "Failed to parse request")
 			return
 		}
 
 		// Check grant type
-		grantType := r.FormValue("grant_type")
+		grantType := r.Form.Get("grant_type")
 		if grantType != "client_credentials" {
 			s.writeError(w, http.StatusBadRequest, "unsupported_grant_type", "Only client_credentials grant is supported")
 			return
@@ -156,8 +157,8 @@ func (s *oauthServer) TokenHandler() http.Handler {
 		// Get client credentials from Basic auth or form body
 		clientID, clientSecret, ok := r.BasicAuth()
 		if !ok {
-			clientID = r.FormValue("client_id")
-			clientSecret = r.FormValue("client_secret")
+			clientID = r.Form.Get("client_id")
+			clientSecret = r.Form.Get("client_secret")
 		}
 
 		// Validate credentials using constant-time comparison
