@@ -744,6 +744,22 @@ func (s *Server) redirectWithError(w http.ResponseWriter, r *http.Request, redir
 
 	// Note: redirect_uri is validated against client.RedirectURIs in handleAuthorizationGet
 	// BEFORE this function is called. External URIs are allowed if they're registered.
+	//
+	// As a defense-in-depth measure, ensure we only redirect to relative URLs or to the
+	// same host as the current request. This prevents open redirects if this helper is
+	// ever called with an unvalidated absolute URL.
+	if u.IsAbs() && u.Hostname() != "" {
+		// Extract hostname from r.Host (which may include a port).
+		requestHost := r.Host
+		if h, _, splitErr := strings.Cut(requestHost, ":"); splitErr == nil {
+			requestHost = h
+		}
+
+		if !strings.EqualFold(u.Hostname(), requestHost) {
+			s.renderLoginError(w, description)
+			return
+		}
+	}
 
 	q := u.Query()
 	q.Set("error", errCode)
