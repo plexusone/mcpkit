@@ -12,8 +12,8 @@ import (
 	"os"
 	"time"
 
-	"github.com/agentplexus/mcpkit/oauth2"
 	"github.com/modelcontextprotocol/go-sdk/mcp"
+	"github.com/plexusone/mcpkit/oauth2"
 	"golang.ngrok.com/ngrok"
 	"golang.ngrok.com/ngrok/config"
 )

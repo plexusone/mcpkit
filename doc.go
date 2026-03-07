@@ -16,7 +16,7 @@
 //
 // For building MCP servers, import the runtime package:
 //
-//	import "github.com/agentplexus/mcpkit/runtime"
+//	import "github.com/plexusone/mcpkit/runtime"
 //
 //	rt := runtime.New(&mcp.Implementation{
 //	    Name:    "my-server",
@@ -37,7 +37,7 @@
 // For OAuth 2.1 authentication with PKCE (required by ChatGPT.com and other
 // MCP clients):
 //
-//	import "github.com/agentplexus/mcpkit/oauth2"
+//	import "github.com/plexusone/mcpkit/oauth2"
 //
 //	srv, err := oauth2.New(&oauth2.Config{
 //	    Issuer: "https://example.com",
