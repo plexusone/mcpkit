@@ -1,9 +1,9 @@
 module github.com/plexusone/mcpkit
 
-go 1.25.0
+go 1.26.0
 
 require (
-	github.com/grokify/mogo v0.74.0
+	github.com/grokify/mogo v0.74.1
 	github.com/modelcontextprotocol/go-sdk v1.5.0
 	golang.ngrok.com/ngrok v1.13.0
 )
