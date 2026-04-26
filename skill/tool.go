@@ -120,3 +120,73 @@ func NewTool(name, description string, params map[string]Parameter, handler Tool
 		Handler:         handler,
 	}
 }
+
+// ToJSONSchema converts the tool's parameters to JSON Schema format
+// compatible with OpenAI/Anthropic function calling.
+func (t *FuncTool) ToJSONSchema() map[string]any {
+	return ParametersToJSONSchema(t.ToolParameters)
+}
+
+// ParametersToJSONSchema converts a parameter map to JSON Schema format.
+func ParametersToJSONSchema(params map[string]Parameter) map[string]any {
+	properties := make(map[string]any)
+	var required []string
+
+	for name, param := range params {
+		properties[name] = ParameterToSchema(param)
+		if param.Required {
+			required = append(required, name)
+		}
+	}
+
+	schema := map[string]any{
+		"type":       "object",
+		"properties": properties,
+	}
+
+	if len(required) > 0 {
+		schema["required"] = required
+	}
+
+	return schema
+}
+
+// ParameterToSchema converts a Parameter to JSON Schema format.
+func ParameterToSchema(p Parameter) map[string]any {
+	schema := map[string]any{
+		"type": p.Type,
+	}
+
+	if p.Description != "" {
+		schema["description"] = p.Description
+	}
+
+	if p.Default != nil {
+		schema["default"] = p.Default
+	}
+
+	if len(p.Enum) > 0 {
+		schema["enum"] = p.Enum
+	}
+
+	if p.Items != nil {
+		schema["items"] = ParameterToSchema(*p.Items)
+	}
+
+	if len(p.Properties) > 0 {
+		props := make(map[string]any)
+		var req []string
+		for name, prop := range p.Properties {
+			props[name] = ParameterToSchema(prop)
+			if prop.Required {
+				req = append(req, name)
+			}
+		}
+		schema["properties"] = props
+		if len(req) > 0 {
+			schema["required"] = req
+		}
+	}
+
+	return schema
+}

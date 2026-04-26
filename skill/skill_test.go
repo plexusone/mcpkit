@@ -276,3 +276,121 @@ func TestCustomSkillWithErrors(t *testing.T) {
 		t.Errorf("expected close error %v, got %v", closeErr, err)
 	}
 }
+
+func TestToJSONSchema(t *testing.T) {
+	tool := NewTool("test", "Test tool", map[string]Parameter{
+		"name":  {Type: "string", Description: "User name", Required: true},
+		"age":   {Type: "integer", Description: "Age", Default: 0},
+		"tags":  {Type: "array", Items: &Parameter{Type: "string"}},
+	}, nil)
+
+	schema := tool.ToJSONSchema()
+
+	if schema["type"] != "object" {
+		t.Errorf("expected type 'object', got %v", schema["type"])
+	}
+
+	props, ok := schema["properties"].(map[string]any)
+	if !ok {
+		t.Fatal("expected properties map")
+	}
+
+	if len(props) != 3 {
+		t.Errorf("expected 3 properties, got %d", len(props))
+	}
+
+	// Check required
+	required, ok := schema["required"].([]string)
+	if !ok {
+		t.Fatal("expected required array")
+	}
+
+	if len(required) != 1 || required[0] != "name" {
+		t.Errorf("expected required=['name'], got %v", required)
+	}
+}
+
+func TestParametersToJSONSchema(t *testing.T) {
+	params := map[string]Parameter{
+		"location": {
+			Type:        "object",
+			Description: "Location",
+			Required:    true,
+			Properties: map[string]Parameter{
+				"city":    {Type: "string", Required: true},
+				"country": {Type: "string"},
+			},
+		},
+	}
+
+	schema := ParametersToJSONSchema(params)
+
+	props := schema["properties"].(map[string]any)
+	locSchema := props["location"].(map[string]any)
+
+	if locSchema["type"] != "object" {
+		t.Errorf("expected location type 'object', got %v", locSchema["type"])
+	}
+
+	locProps := locSchema["properties"].(map[string]any)
+	if len(locProps) != 2 {
+		t.Errorf("expected 2 nested properties, got %d", len(locProps))
+	}
+}
+
+func TestParameterToSchema(t *testing.T) {
+	tests := []struct {
+		name  string
+		param Parameter
+		check func(t *testing.T, schema map[string]any)
+	}{
+		{
+			name:  "basic string",
+			param: Parameter{Type: "string", Description: "A string"},
+			check: func(t *testing.T, schema map[string]any) {
+				if schema["type"] != "string" {
+					t.Errorf("expected type 'string', got %v", schema["type"])
+				}
+				if schema["description"] != "A string" {
+					t.Errorf("expected description 'A string', got %v", schema["description"])
+				}
+			},
+		},
+		{
+			name:  "with default",
+			param: Parameter{Type: "integer", Default: 42},
+			check: func(t *testing.T, schema map[string]any) {
+				if schema["default"] != 42 {
+					t.Errorf("expected default 42, got %v", schema["default"])
+				}
+			},
+		},
+		{
+			name:  "with enum",
+			param: Parameter{Type: "string", Enum: []any{"a", "b"}},
+			check: func(t *testing.T, schema map[string]any) {
+				enum := schema["enum"].([]any)
+				if len(enum) != 2 {
+					t.Errorf("expected 2 enum values, got %d", len(enum))
+				}
+			},
+		},
+		{
+			name:  "array with items",
+			param: Parameter{Type: "array", Items: &Parameter{Type: "number"}},
+			check: func(t *testing.T, schema map[string]any) {
+				items := schema["items"].(map[string]any)
+				if items["type"] != "number" {
+					t.Errorf("expected items type 'number', got %v", items["type"])
+				}
+			},
+		},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			schema := ParameterToSchema(tt.param)
+			tt.check(t, schema)
+		})
+	}
+}
