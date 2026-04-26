@@ -8,13 +8,13 @@
   - Repository renamed
   - Git remote updated
 
-- [ ] **TASK-101**: Restructure package layout
+- [x] **TASK-101**: Restructure package layout
   - Move `runtime/` → `mcp/server/`
   - Move `client/` → `mcp/client/`
   - Move `oauth2/` → `mcp/oauth2/`
   - Update internal imports
 
-- [ ] **TASK-102**: Update module path
+- [x] **TASK-102**: Update module path
   - Change `github.com/plexusone/mcpkit` → `github.com/plexusone/omniskill`
   - Update go.mod
   - Update all import statements
@@ -138,9 +138,10 @@
 
 ### Next Actions
 
-1. Complete TASK-101: Restructure package layout
-2. Complete TASK-102: Update module path
-3. Create skill/ and registry/ packages (TASK-110, TASK-120)
+1. ~~Complete TASK-101: Restructure package layout~~ ✅
+2. ~~Complete TASK-102: Update module path~~ ✅
+3. Add backwards compatibility (TASK-103)
+4. Create skill/ and registry/ packages (TASK-110, TASK-120)
 
 ### Dependencies
 
