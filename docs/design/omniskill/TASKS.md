@@ -25,7 +25,7 @@
 
 ### Core Interfaces
 
-- [ ] **TASK-110**: Create `skill/` package
+- [x] **TASK-110**: Create `skill/` package
   - Define Skill interface
   - Define Tool interface
   - Define Parameter type
@@ -139,8 +139,10 @@
 
 1. ~~Complete TASK-101: Restructure package layout~~ ✅
 2. ~~Complete TASK-102: Update module path~~ ✅
-3. Create skill/ and registry/ packages (TASK-110, TASK-120)
-4. Migration documentation (TASK-103) - can be done at release time
+3. ~~Create skill/ package (TASK-110)~~ ✅
+4. Create registry/ package (TASK-120)
+5. Create skill builder (TASK-111)
+6. Migration documentation (TASK-103) - can be done at release time
 
 ### Dependencies
 
