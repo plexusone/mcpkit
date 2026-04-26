@@ -10,6 +10,7 @@ import (
 	"testing"
 
 	"github.com/modelcontextprotocol/go-sdk/mcp"
+	"github.com/plexusone/omniskill/registry"
 	"github.com/plexusone/omniskill/skill"
 )
 
@@ -357,4 +358,80 @@ func TestCallToolViaRuntime(t *testing.T) {
 	if output["product"] != 12.0 {
 		t.Errorf("expected product=12, got %v", output["product"])
 	}
+}
+
+func TestRegisterSkillWithAutoRegistration(t *testing.T) {
+	reg := registry.New()
+	rt := New(&mcp.Implementation{Name: "test", Version: "1.0"}, &Options{
+		Registry: reg,
+	})
+
+	tool := skill.NewTool("greet", "Greet user", nil,
+		func(ctx context.Context, params map[string]any) (any, error) {
+			return "hello", nil
+		},
+	)
+
+	s := &skill.BaseSkill{
+		SkillName:  "greeter",
+		SkillTools: []skill.Tool{tool},
+	}
+
+	rt.RegisterSkill(s)
+
+	// Verify tool is registered with runtime
+	if !rt.HasTool("greet") {
+		t.Error("expected tool 'greet' to be registered with runtime")
+	}
+
+	// Verify skill is registered with registry
+	gotSkill, err := reg.Get("greeter")
+	if err != nil {
+		t.Fatalf("expected skill to be in registry: %v", err)
+	}
+	if gotSkill.Name() != "greeter" {
+		t.Errorf("expected skill name 'greeter', got %q", gotSkill.Name())
+	}
+}
+
+func TestRegisterSkillWithPrefixAutoRegistration(t *testing.T) {
+	reg := registry.New()
+	rt := New(&mcp.Implementation{Name: "test", Version: "1.0"}, &Options{
+		Registry: reg,
+	})
+
+	tool := skill.NewTool("do_thing", "Does something", nil,
+		func(ctx context.Context, params map[string]any) (any, error) {
+			return nil, nil
+		},
+	)
+
+	s := &skill.BaseSkill{
+		SkillName:  "myskill",
+		SkillTools: []skill.Tool{tool},
+	}
+
+	rt.RegisterSkillWithPrefix(s)
+
+	// Verify tool is registered with prefix
+	if !rt.HasTool("myskill_do_thing") {
+		t.Error("expected tool 'myskill_do_thing' to be registered")
+	}
+
+	// Verify skill is registered with registry
+	if reg.Count() != 1 {
+		t.Errorf("expected 1 skill in registry, got %d", reg.Count())
+	}
+}
+
+func TestRegisterSkillNoAutoRegistration(t *testing.T) {
+	// Without registry option, skills should not be auto-registered
+	rt := New(&mcp.Implementation{Name: "test", Version: "1.0"}, nil)
+
+	s := &skill.BaseSkill{
+		SkillName: "test",
+	}
+
+	// This should not panic even without registry
+	rt.RegisterSkill(s)
 }

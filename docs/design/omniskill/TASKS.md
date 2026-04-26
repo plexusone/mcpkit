@@ -55,9 +55,9 @@
   - Convert skill.Tool → mcp.Tool automatically
   - Tests
 
-- [ ] **TASK-201**: Auto-registration option
-  - Add `WithAutoRegister()` option
-  - Register skills with omniskill registry on server start
+- [x] **TASK-201**: Auto-registration option
+  - Add `Registry` field to Options
+  - Register skills with omniskill registry on RegisterSkill
   - Tests
 
 ### Client Integration

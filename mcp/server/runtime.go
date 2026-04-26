@@ -13,6 +13,7 @@ import (
 	"sync"
 
 	"github.com/modelcontextprotocol/go-sdk/mcp"
+	"github.com/plexusone/omniskill/registry"
 )
 
 // Runtime is the core type for mcpkit. It wraps an MCP Server and provides
@@ -60,6 +61,10 @@ type Options struct {
 
 	// ServerOptions are passed directly to the underlying mcp.Server.
 	ServerOptions *mcp.ServerOptions
+
+	// Registry for auto-registration of skills. If set, skills registered
+	// with RegisterSkill will also be registered with this registry.
+	Registry registry.Registry
 }
 
 // New creates a new Runtime with the given implementation info and options.

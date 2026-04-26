@@ -18,6 +18,9 @@ import (
 // The skill's Init method is NOT called - callers should initialize
 // skills before registration if needed.
 //
+// If a Registry was configured via Options, the skill is also registered
+// with the registry for discovery by other components.
+//
 // Tool names are registered as-is (no skill prefix). If you need
 // namespacing, include it in the tool names within the skill.
 //
@@ -35,6 +38,16 @@ func (r *Runtime) RegisterSkill(s skill.Skill) {
 		r.AddToolHandler(mcpTool, handler)
 	}
 
+	// Auto-register with registry if configured
+	if r.opts.Registry != nil {
+		if err := r.opts.Registry.Register(s); err != nil {
+			r.logger.Warn("failed to register skill with registry",
+				"skill", s.Name(),
+				"error", err,
+			)
+		}
+	}
+
 	r.logger.Debug("registered skill",
 		"skill", s.Name(),
 		"tools", len(s.Tools()),
@@ -46,6 +59,9 @@ func (r *Runtime) RegisterSkill(s skill.Skill) {
 // Each tool name is prefixed with "skillname_" to avoid conflicts.
 // For example, a skill named "weather" with tool "get_forecast" would
 // register as "weather_get_forecast".
+//
+// If a Registry was configured via Options, the skill is also registered
+// with the registry for discovery by other components.
 func (r *Runtime) RegisterSkillWithPrefix(s skill.Skill) {
 	prefix := s.Name() + "_"
 	for _, t := range s.Tools() {
@@ -53,6 +69,16 @@ func (r *Runtime) RegisterSkillWithPrefix(s skill.Skill) {
 		mcpTool.Name = prefix + mcpTool.Name
 		handler := createToolHandler(t)
 		r.AddToolHandler(mcpTool, handler)
+	}
+
+	// Auto-register with registry if configured
+	if r.opts.Registry != nil {
+		if err := r.opts.Registry.Register(s); err != nil {
+			r.logger.Warn("failed to register skill with registry",
+				"skill", s.Name(),
+				"error", err,
+			)
+		}
 	}
 
 	r.logger.Debug("registered skill with prefix",
