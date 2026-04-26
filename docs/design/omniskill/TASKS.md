@@ -62,7 +62,7 @@
 
 ### Client Integration
 
-- [ ] **TASK-210**: MCP session as skill
+- [x] **TASK-210**: MCP session as skill
   - Add `Session.AsSkill()` method
   - Wrap mcp.Tool as skill.Tool
   - Cache discovered tools
