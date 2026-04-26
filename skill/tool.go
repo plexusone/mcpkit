@@ -1,0 +1,122 @@
+// Copyright 2025 John Wang. All rights reserved.
+// Use of this source code is governed by an MIT-style
+// license that can be found in the LICENSE file.
+
+package skill
+
+import "context"
+
+// Tool represents a single callable function within a skill.
+//
+// Tools are the atomic unit of functionality. Each tool has:
+//   - A unique name within its skill
+//   - A description for AI models to understand its purpose
+//   - Parameters describing its inputs
+//   - A handler that executes the tool logic
+//
+// Example implementation:
+//
+//	type GetWeatherTool struct{}
+//
+//	func (t *GetWeatherTool) Name() string        { return "get_current_weather" }
+//	func (t *GetWeatherTool) Description() string { return "Get the current weather for a location" }
+//	func (t *GetWeatherTool) Parameters() map[string]Parameter {
+//	    return map[string]Parameter{
+//	        "location": {Type: "string", Description: "City name", Required: true},
+//	        "units":    {Type: "string", Description: "Temperature units", Enum: []any{"celsius", "fahrenheit"}},
+//	    }
+//	}
+//	func (t *GetWeatherTool) Call(ctx context.Context, params map[string]any) (any, error) {
+//	    location := params["location"].(string)
+//	    // ... fetch weather ...
+//	    return map[string]any{"temperature": 72, "condition": "sunny"}, nil
+//	}
+type Tool interface {
+	// Name returns the tool identifier (e.g., "get_current_weather").
+	// Names should be lowercase, alphanumeric with underscores.
+	Name() string
+
+	// Description returns a human-readable description of what the tool does.
+	// This is used by AI models to understand when to use the tool.
+	Description() string
+
+	// Parameters returns the JSON Schema-like parameter definitions.
+	// The map keys are parameter names.
+	Parameters() map[string]Parameter
+
+	// Call executes the tool with the given parameters.
+	// Parameters have already been validated against the schema.
+	// Returns the tool output or an error.
+	Call(ctx context.Context, params map[string]any) (any, error)
+}
+
+// Parameter describes a tool parameter.
+//
+// Parameters follow JSON Schema conventions for describing input types.
+type Parameter struct {
+	// Type is the JSON Schema type: "string", "number", "integer", "boolean", "object", "array".
+	Type string `json:"type"`
+
+	// Description explains what the parameter is for.
+	Description string `json:"description,omitempty"`
+
+	// Required indicates whether the parameter must be provided.
+	Required bool `json:"required,omitempty"`
+
+	// Enum lists the allowed values for this parameter.
+	Enum []any `json:"enum,omitempty"`
+
+	// Default is the default value if not provided.
+	Default any `json:"default,omitempty"`
+
+	// Items describes array element type (when Type is "array").
+	Items *Parameter `json:"items,omitempty"`
+
+	// Properties describes object properties (when Type is "object").
+	Properties map[string]Parameter `json:"properties,omitempty"`
+}
+
+// ToolFunc is a function type that can be used as a tool handler.
+type ToolFunc func(ctx context.Context, params map[string]any) (any, error)
+
+// FuncTool wraps a function as a Tool.
+// This is useful for creating simple tools without implementing the full interface.
+type FuncTool struct {
+	ToolName        string
+	ToolDescription string
+	ToolParameters  map[string]Parameter
+	Handler         ToolFunc
+}
+
+// Name returns the tool name.
+func (t *FuncTool) Name() string {
+	return t.ToolName
+}
+
+// Description returns the tool description.
+func (t *FuncTool) Description() string {
+	return t.ToolDescription
+}
+
+// Parameters returns the tool parameters.
+func (t *FuncTool) Parameters() map[string]Parameter {
+	return t.ToolParameters
+}
+
+// Call executes the tool handler.
+func (t *FuncTool) Call(ctx context.Context, params map[string]any) (any, error) {
+	return t.Handler(ctx, params)
+}
+
+// Ensure FuncTool implements Tool.
+var _ Tool = (*FuncTool)(nil)
+
+// NewTool creates a new FuncTool with the given properties.
+func NewTool(name, description string, params map[string]Parameter, handler ToolFunc) *FuncTool {
+	return &FuncTool{
+		ToolName:        name,
+		ToolDescription: description,
+		ToolParameters:  params,
+		Handler:         handler,
+	}
+}
