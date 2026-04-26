@@ -7,6 +7,22 @@
   "maintainers": ["plexusone"],
   "releases": [
     {
+      "version": "v0.5.0",
+      "date": "2026-04-26",
+      "highlights": [
+        { "description": "MCP client package for connecting to external MCP servers" }
+      ],
+      "added": [
+        { "description": "`client/` package for MCP client connections", "commit": "cad03e5" },
+        { "description": "`client.New()` constructor with configurable client name and version", "commit": "cad03e5" },
+        { "description": "`client.Connect()` for establishing sessions with any MCP transport", "commit": "cad03e5" },
+        { "description": "`client.ConnectCommand()` for spawning MCP servers as subprocesses", "commit": "cad03e5" },
+        { "description": "`Session.ListTools()` for discovering available tools from MCP server", "commit": "cad03e5" },
+        { "description": "`Session.CallTool()` for invoking tools on MCP server", "commit": "cad03e5" },
+        { "description": "`Session.MCPSession()` escape hatch for advanced MCP SDK access", "commit": "cad03e5" }
+      ]
+    },
+    {
       "version": "v0.4.0",
       "date": "2026-03-07",
       "highlights": [
