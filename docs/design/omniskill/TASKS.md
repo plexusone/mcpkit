@@ -19,10 +19,9 @@
   - Update go.mod
   - Update all import statements
 
-- [ ] **TASK-103**: Backwards compatibility
-  - Add module aliases at old paths
-  - Document migration guide
-  - Update CHANGELOG
+- [ ] **TASK-103**: Migration documentation
+  - Document migration guide in README or UPGRADING.md
+  - Update CHANGELOG for v0.6.0
 
 ### Core Interfaces
 
@@ -140,8 +139,8 @@
 
 1. ~~Complete TASK-101: Restructure package layout~~ ✅
 2. ~~Complete TASK-102: Update module path~~ ✅
-3. Add backwards compatibility (TASK-103)
-4. Create skill/ and registry/ packages (TASK-110, TASK-120)
+3. Create skill/ and registry/ packages (TASK-110, TASK-120)
+4. Migration documentation (TASK-103) - can be done at release time
 
 ### Dependencies
 
