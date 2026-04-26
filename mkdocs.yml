@@ -1,31 +1,35 @@
 site_name: OmniSkill
 site_description: Unified skill infrastructure for AI agents in Go
-site_url: https://plexusone.dev/omniskill
+site_url: https://plexusone.github.io/omniskill
 repo_url: https://github.com/plexusone/omniskill
 repo_name: plexusone/omniskill
 
 theme:
   name: material
+  custom_dir: docs/overrides
   palette:
-    - scheme: default
-      primary: indigo
-      accent: indigo
-      toggle:
-        icon: material/brightness-7
-        name: Switch to dark mode
+    # Dark mode first (PlexusOne default)
     - scheme: slate
-      primary: indigo
-      accent: indigo
+      primary: custom
+      accent: custom
       toggle:
         icon: material/brightness-4
         name: Switch to light mode
+    - scheme: default
+      primary: custom
+      accent: custom
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
   features:
-    - navigation.tabs
     - navigation.sections
     - navigation.expand
     - navigation.top
+    - search.highlight
     - content.code.copy
-    - content.code.annotate
+
+extra_css:
+  - https://plexusone.dev/css/plexusone-mkdocs.css
 
 markdown_extensions:
   - pymdownx.highlight:
@@ -35,21 +39,27 @@ markdown_extensions:
       alternate_style: true
   - admonition
   - pymdownx.details
+  - tables
   - toc:
       permalink: true
 
 nav:
   - Home: index.md
   - Getting Started:
-    - Installation: getting-started/installation.md
-    - Quick Start: getting-started/quickstart.md
+      - Installation: getting-started/installation.md
+      - Quick Start: getting-started/quickstart.md
   - Concepts:
-    - Overview: concepts/overview.md
-    - Skills: concepts/skills.md
-    - Tools: concepts/tools.md
-    - Registry: concepts/registry.md
+      - Overview: concepts/overview.md
+      - Skills: concepts/skills.md
+      - Tools: concepts/tools.md
+      - Registry: concepts/registry.md
   - MCP:
-    - Server: mcp/server.md
-    - Client: mcp/client.md
-    - OAuth2: mcp/oauth2.md
+      - Server: mcp/server.md
+      - Client: mcp/client.md
+      - OAuth2: mcp/oauth2.md
   - API Reference: api/index.md
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/plexusone/omniskill
