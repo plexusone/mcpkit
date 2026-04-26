@@ -38,7 +38,7 @@
 
 ### Registry
 
-- [ ] **TASK-120**: Create `registry/` package
+- [x] **TASK-120**: Create `registry/` package
   - Define Registry interface
   - In-memory implementation
   - Thread-safe operations
@@ -50,7 +50,7 @@
 
 ### Server Integration
 
-- [ ] **TASK-200**: MCP server skill support
+- [x] **TASK-200**: MCP server skill support
   - Add `RegisterSkill()` to Runtime
   - Convert skill.Tool → mcp.Tool automatically
   - Tests
