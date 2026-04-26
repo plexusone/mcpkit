@@ -2,42 +2,50 @@
 // Use of this source code is governed by an MIT-style
 // license that can be found in the LICENSE file.
 
-// Package mcpkit provides a toolkit for building MCP (Model Context Protocol)
-// applications in Go.
+// Package omniskill provides a unified skill/tool infrastructure for AI applications.
 //
-// MCPKit is organized into focused subpackages:
+// OmniSkill is organized into focused subpackages:
 //
-//   - runtime: Core MCP server runtime with tools, prompts, resources, and
+//   - mcp/server: MCP server runtime with tools, prompts, resources, and
 //     multiple transport options (stdio, HTTP, SSE)
-//   - oauth2: OAuth 2.1 Authorization Server with PKCE support for
+//   - mcp/client: MCP client for connecting to external MCP servers
+//   - mcp/oauth2: OAuth 2.1 Authorization Server with PKCE support for
 //     MCP authentication
 //
 // # Quick Start
 //
-// For building MCP servers, import the runtime package:
+// For building MCP servers, import the server package:
 //
-//	import "github.com/plexusone/mcpkit/runtime"
+//	import "github.com/plexusone/omniskill/mcp/server"
 //
-//	rt := runtime.New(&mcp.Implementation{
+//	rt := server.New(&mcp.Implementation{
 //	    Name:    "my-server",
 //	    Version: "1.0.0",
 //	}, nil)
 //
 //	// Add tools, prompts, resources
-//	runtime.AddTool(rt, tool, handler)
+//	server.AddTool(rt, tool, handler)
 //
 //	// Library mode: call directly
 //	result, err := rt.CallTool(ctx, "add", map[string]any{"a": 1, "b": 2})
 //
 //	// Server mode: serve via HTTP
-//	rt.ServeHTTP(ctx, &runtime.HTTPServerOptions{
+//	rt.ServeHTTP(ctx, &server.HTTPServerOptions{
 //	    Addr: ":8080",
 //	})
+//
+// For connecting to MCP servers as a client:
+//
+//	import "github.com/plexusone/omniskill/mcp/client"
+//
+//	c := client.New("my-app", "1.0.0", nil)
+//	session, err := c.ConnectCommand(ctx, exec.Command("npx", "-y", "@modelcontextprotocol/server-github"), nil)
+//	tools, err := session.ListTools(ctx)
 //
 // For OAuth 2.1 authentication with PKCE (required by ChatGPT.com and other
 // MCP clients):
 //
-//	import "github.com/plexusone/mcpkit/oauth2"
+//	import "github.com/plexusone/omniskill/mcp/oauth2"
 //
 //	srv, err := oauth2.New(&oauth2.Config{
 //	    Issuer: "https://example.com",
@@ -48,17 +56,9 @@
 //
 // # Design Philosophy
 //
-// MCP (Model Context Protocol) is fundamentally a client-server protocol based
-// on JSON-RPC. However, many use cases benefit from invoking MCP capabilities
-// directly in-process without the overhead of transport serialization:
+// OmniSkill enables defining skills once and exposing them across multiple
+// formats: MCP protocol, compiled Go skills, OpenAPI, and more.
 //
-//   - Unit testing tools without mocking transports
-//   - Embedding agent capabilities in applications
-//   - Building local pipelines
-//   - Serverless runtimes
-//
-// mcpkit treats MCP as an "edge protocol" while providing a library-first
-// internal API. Tools registered with mcpkit use the exact same handler
-// signatures as the MCP SDK, ensuring behavior is identical regardless of
-// execution mode.
-package mcpkit
+// MCP (Model Context Protocol) is treated as the primary interoperability
+// protocol, while providing zero-overhead library-mode for Go consumers.
+package omniskill

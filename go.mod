@@ -1,4 +1,4 @@
-module github.com/plexusone/mcpkit
+module github.com/plexusone/omniskill
 
 go 1.26.0
 

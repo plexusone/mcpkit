@@ -13,7 +13,7 @@ import (
 	"time"
 
 	"github.com/modelcontextprotocol/go-sdk/mcp"
-	"github.com/plexusone/mcpkit/oauth2"
+	"github.com/plexusone/omniskill/mcp/oauth2"
 	"golang.ngrok.com/ngrok"
 	"golang.ngrok.com/ngrok/config"
 )

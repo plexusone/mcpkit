@@ -218,7 +218,7 @@ func (s *Server) handleAuthorizationGet(w http.ResponseWriter, r *http.Request) 
 	}
 
 	if responseType != "code" {
-		s.redirectWithError(w, r, redirectURI, state, ErrorUnsupportedResponseType, "Only 'code' response_type is supported", client.RedirectURIs)
+		s.redirectWithError(w, r, redirectURI, state, ErrorUnsupportedResponseType, "Only 'code' response_type is supported", nil)
 		return
 	}
 
@@ -241,7 +241,7 @@ func (s *Server) handleAuthorizationGet(w http.ResponseWriter, r *http.Request) 
 
 	// PKCE is required for OAuth 2.1
 	if codeChallenge == "" {
-		s.redirectWithError(w, r, redirectURI, state, ErrorInvalidRequest, "code_challenge is required (PKCE)")
+		s.redirectWithError(w, r, redirectURI, state, ErrorInvalidRequest, "code_challenge is required (PKCE)", client.RedirectURIs)
 		return
 	}
 
@@ -312,7 +312,7 @@ func (s *Server) handleAuthorizationPost(w http.ResponseWriter, r *http.Request)
 	// Generate authorization code
 	code, err := GenerateAuthorizationCode()
 	if err != nil {
-		s.redirectWithError(w, r, redirectURI, state, ErrorServerError, "Failed to generate authorization code")
+		s.redirectWithError(w, r, redirectURI, state, ErrorServerError, "Failed to generate authorization code", client.RedirectURIs)
 		return
 	}
 
@@ -330,7 +330,7 @@ func (s *Server) handleAuthorizationPost(w http.ResponseWriter, r *http.Request)
 	}
 
 	if err := s.storage.CreateAuthorizationCode(authCode); err != nil {
-		s.redirectWithError(w, r, redirectURI, state, ErrorServerError, "Failed to store authorization code")
+		s.redirectWithError(w, r, redirectURI, state, ErrorServerError, "Failed to store authorization code", client.RedirectURIs)
 		return
 	}
 
