@@ -313,6 +313,7 @@ func TestConcurrentAccess(t *testing.T) {
 	done := make(chan bool, 10)
 	for i := 0; i < 10; i++ {
 		go func(n int) {
+			//nolint:gosec // n is bounded 0-9, no overflow possible
 			s := &skill.BaseSkill{SkillName: string(rune('a' + n))}
 			_ = r.Register(s)
 			done <- true

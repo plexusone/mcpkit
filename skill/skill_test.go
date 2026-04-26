@@ -221,11 +221,11 @@ type customSkill struct {
 	closeErr    error
 }
 
-func (s *customSkill) Name() string                       { return s.name }
-func (s *customSkill) Description() string                { return s.description }
-func (s *customSkill) Tools() []Tool                      { return s.tools }
-func (s *customSkill) Init(ctx context.Context) error     { s.initCalled = true; return s.initErr }
-func (s *customSkill) Close() error                       { s.closeCalled = true; return s.closeErr }
+func (s *customSkill) Name() string                   { return s.name }
+func (s *customSkill) Description() string            { return s.description }
+func (s *customSkill) Tools() []Tool                  { return s.tools }
+func (s *customSkill) Init(ctx context.Context) error { s.initCalled = true; return s.initErr }
+func (s *customSkill) Close() error                   { s.closeCalled = true; return s.closeErr }
 
 func TestCustomSkill(t *testing.T) {
 	skill := &customSkill{
@@ -279,9 +279,9 @@ func TestCustomSkillWithErrors(t *testing.T) {
 
 func TestToJSONSchema(t *testing.T) {
 	tool := NewTool("test", "Test tool", map[string]Parameter{
-		"name":  {Type: "string", Description: "User name", Required: true},
-		"age":   {Type: "integer", Description: "Age", Default: 0},
-		"tags":  {Type: "array", Items: &Parameter{Type: "string"}},
+		"name": {Type: "string", Description: "User name", Required: true},
+		"age":  {Type: "integer", Description: "Age", Default: 0},
+		"tags": {Type: "array", Items: &Parameter{Type: "string"}},
 	}, nil)
 
 	schema := tool.ToJSONSchema()
