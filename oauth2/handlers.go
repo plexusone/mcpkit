@@ -218,7 +218,7 @@ func (s *Server) handleAuthorizationGet(w http.ResponseWriter, r *http.Request) 
 	}
 
 	if responseType != "code" {
-		s.redirectWithError(w, r, redirectURI, state, ErrorUnsupportedResponseType, "Only 'code' response_type is supported")
+		s.redirectWithError(w, r, redirectURI, state, ErrorUnsupportedResponseType, "Only 'code' response_type is supported", client.RedirectURIs)
 		return
 	}
 
@@ -246,7 +246,7 @@ func (s *Server) handleAuthorizationGet(w http.ResponseWriter, r *http.Request) 
 	}
 
 	if codeChallengeMethod != "" && codeChallengeMethod != PKCEMethodS256 {
-		s.redirectWithError(w, r, redirectURI, state, ErrorInvalidRequest, "Only S256 code_challenge_method is supported")
+		s.redirectWithError(w, r, redirectURI, state, ErrorInvalidRequest, "Only S256 code_challenge_method is supported", client.RedirectURIs)
 		return
 	}
 
@@ -737,7 +737,7 @@ func writeOAuthError(w http.ResponseWriter, status int, errCode, description str
 	})
 }
 
-func (s *Server) redirectWithError(w http.ResponseWriter, r *http.Request, redirectURI, state, errCode, description string) {
+func (s *Server) redirectWithError(w http.ResponseWriter, r *http.Request, redirectURI, state, errCode, description string, allowedRedirectURIs []string) {
 	if redirectURI == "" {
 		s.renderLoginError(w, description)
 		return
@@ -746,15 +746,17 @@ func (s *Server) redirectWithError(w http.ResponseWriter, r *http.Request, redir
 	// Normalize backslashes to forward slashes before parsing
 	normalized := strings.ReplaceAll(redirectURI, "\\", "/")
 
+	// Enforce allowlist validation at redirect sink.
+	if !isValidRedirectURI(normalized, allowedRedirectURIs) {
+		s.renderLoginError(w, "Invalid redirect_uri")
+		return
+	}
+
 	u, err := url.Parse(normalized)
 	if err != nil {
 		s.renderLoginError(w, description)
 		return
 	}
-
-	// Note: redirect_uri is validated against client.RedirectURIs in handleAuthorizationGet
-	// BEFORE this function is called. External URIs are allowed if they're registered.
-	// Redirecting to external hosts is expected OAuth behavior (client callback URLs).
 
 	q := u.Query()
 	q.Set("error", errCode)
