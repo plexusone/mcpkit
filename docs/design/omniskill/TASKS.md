@@ -133,16 +133,25 @@
 
 **Last mcpkit Release**: v0.5.0 (2026-04-26) - Added MCP client package
 
-**Current Phase**: Phase 1 - Foundation
+**Current Phase**: Phase 2 - MCP Integration (Complete)
+
+### Completed
+
+- ✅ TASK-100: Rename mcpkit → omniskill
+- ✅ TASK-101: Restructure package layout
+- ✅ TASK-102: Update module path
+- ✅ TASK-110: Create skill/ package
+- ✅ TASK-120: Create registry/ package
+- ✅ TASK-200: MCP server skill support
+- ✅ TASK-201: Auto-registration option
+- ✅ TASK-210: MCP session as skill
 
 ### Next Actions
 
-1. ~~Complete TASK-101: Restructure package layout~~ ✅
-2. ~~Complete TASK-102: Update module path~~ ✅
-3. ~~Create skill/ package (TASK-110)~~ ✅
-4. Create registry/ package (TASK-120)
-5. Create skill builder (TASK-111)
-6. Migration documentation (TASK-103) - can be done at release time
+1. TASK-103: Migration documentation (at release time)
+2. TASK-111: Create skill builder (optional, low priority)
+3. Phase 3: OpenAPI Import (TASK-300, 301, 310, 311)
+4. Phase 4: Export Formats (TASK-400, 410, 411, 420, 421)
 
 ### Dependencies
 
