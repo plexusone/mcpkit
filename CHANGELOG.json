@@ -1,11 +1,53 @@
 {
   "irVersion": "1.0",
-  "project": "mcpkit",
-  "repository": "https://github.com/plexusone/mcpkit",
+  "project": "omniskill",
+  "repository": "https://github.com/plexusone/omniskill",
   "versioning": "semver",
   "commitConvention": "conventional",
   "maintainers": ["plexusone"],
   "releases": [
+    {
+      "version": "v0.6.0",
+      "date": "2026-04-26",
+      "highlights": [
+        { "description": "Project renamed from MCPKit to OmniSkill" },
+        { "description": "New `skill/` package with unified skill infrastructure for AI agents" },
+        { "description": "Registry package for skill and tool management" }
+      ],
+      "breaking": [
+        { "description": "Module path changed from `github.com/plexusone/mcpkit` to `github.com/plexusone/omniskill`", "commit": "9251c85" },
+        { "description": "MCP packages moved under `mcp/` subpackage: `runtime` → `mcp/runtime`, `oauth2` → `mcp/oauth2`, `client` → `mcp/client`", "commit": "9251c85" }
+      ],
+      "upgradeGuide": [
+        { "description": "Update imports: replace `github.com/plexusone/mcpkit/runtime` with `github.com/plexusone/omniskill/mcp/runtime`" },
+        { "description": "Update imports: replace `github.com/plexusone/mcpkit/oauth2` with `github.com/plexusone/omniskill/mcp/oauth2`" },
+        { "description": "Update imports: replace `github.com/plexusone/mcpkit/client` with `github.com/plexusone/omniskill/mcp/client`" },
+        { "description": "Run `go mod tidy` to update dependencies" }
+      ],
+      "added": [
+        { "description": "`skill.Skill` interface defining `Name()`, `Description()`, `Tools()`, `Init()`, and `Close()` methods", "commit": "475d66f" },
+        { "description": "`skill.Tool` interface for callable tools with `Name()`, `Description()`, `Parameters()`, and `Call()` methods", "commit": "475d66f" },
+        { "description": "`skill.FuncTool` struct implementing `Tool` interface with function handler", "commit": "475d66f" },
+        { "description": "`skill.NewTool()` constructor for creating tools with parameters and handlers", "commit": "475d66f" },
+        { "description": "`skill.Parameter` type with JSON Schema-compatible fields (Type, Description, Required, Default, Enum, Items, Properties)", "commit": "475d66f" },
+        { "description": "`skill.BaseSkill` helper struct for simple skill implementations", "commit": "475d66f" },
+        { "description": "`skill.ParametersToJSONSchema()` for converting parameters to JSON Schema format", "commit": "475d66f" },
+        { "description": "`skill.ToJSONSchema()` for generating complete tool JSON Schema for LLM function calling", "commit": "2d3e1be" },
+        { "description": "`registry.Registry` for managing skills and discovering tools", "commit": "705bb5e" },
+        { "description": "`registry.Register()` and `registry.Unregister()` for skill lifecycle management", "commit": "705bb5e" },
+        { "description": "`registry.Get()`, `registry.List()`, `registry.Count()` for skill access", "commit": "705bb5e" },
+        { "description": "`registry.GetTool()`, `registry.ListTools()`, `registry.FindTool()` for tool discovery", "commit": "705bb5e" },
+        { "description": "`registry.Init()` and `registry.Close()` for batch skill lifecycle", "commit": "705bb5e" },
+        { "description": "`mcp/runtime.RegisterSkill()` for exposing skill tools as MCP tools", "commit": "063b657" },
+        { "description": "`mcp/runtime.RegisterRegistry()` for auto-registering all skills from a registry", "commit": "0a202c6" },
+        { "description": "`mcp/client.Session.AsSkill()` for wrapping MCP sessions as skills", "commit": "b66c5f9" }
+      ],
+      "documentation": [
+        { "description": "MkDocs site with comprehensive documentation", "commit": "7efc6bc" },
+        { "description": "Concepts documentation for skills, tools, and registry", "commit": "7efc6bc" },
+        { "description": "Release notes reorganized under `docs/releases/`", "commit": "c574834" }
+      ]
+    },
     {
       "version": "v0.5.0",
       "date": "2026-04-26",
