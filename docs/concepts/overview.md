@@ -126,4 +126,5 @@ reg.Register(remoteSkill)
 
 - [Skills](skills.md) - Creating and managing skills
 - [Tools](tools.md) - Defining tools and parameters
+- [Packs](packs.md) - Distributing skills as Go modules
 - [Registry](registry.md) - Skill registration and discovery
