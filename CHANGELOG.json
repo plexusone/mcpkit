@@ -7,6 +7,22 @@
   "maintainers": ["plexusone"],
   "releases": [
     {
+      "version": "v0.7.0",
+      "date": "2026-04-26",
+      "highlights": [
+        { "description": "New `pack/` package for embedding markdown skill bundles" }
+      ],
+      "added": [
+        { "description": "`pack.SkillPack` interface for embedding markdown skills via go:embed", "commit": "a9198d7" },
+        { "description": "`SkillPack.Name()` returns pack identifier (e.g., \"omniagent-skills\")", "commit": "a9198d7" },
+        { "description": "`SkillPack.Version()` returns pack version or source commit hash", "commit": "a9198d7" },
+        { "description": "`SkillPack.FS()` returns embedded filesystem with skills at `skills/<name>/SKILL.md`", "commit": "a9198d7" }
+      ],
+      "documentation": [
+        { "description": "Package documentation with usage examples", "commit": "a9198d7" }
+      ]
+    },
+    {
       "version": "v0.6.0",
       "date": "2026-04-26",
       "highlights": [
