@@ -4,13 +4,13 @@ go 1.26.0
 
 require (
 	github.com/grokify/mogo v0.74.2
-	github.com/modelcontextprotocol/go-sdk v1.5.0
+	github.com/modelcontextprotocol/go-sdk v1.6.0
 	golang.ngrok.com/ngrok v1.13.0
 )
 
 require (
 	github.com/go-stack/stack v1.8.1 // indirect
-	github.com/google/jsonschema-go v0.4.2 // indirect
+	github.com/google/jsonschema-go v0.4.3 // indirect
 	github.com/huandu/xstrings v1.5.0 // indirect
 	github.com/inconshreveable/log15 v3.0.0-testing.5+incompatible // indirect
 	github.com/inconshreveable/log15/v3 v3.1.0 // indirect
