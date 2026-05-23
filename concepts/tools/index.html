@@ -16,7 +16,7 @@
         <link rel="prev" href="../skills/">
       
       
-        <link rel="next" href="../packs/">
+        <link rel="next" href="../loader/">
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
@@ -647,6 +647,66 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#commandtool" class="md-nav__link">
+    <span class="md-ellipsis">
+      CommandTool
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="CommandTool">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#commandtool-fields" class="md-nav__link">
+    <span class="md-ellipsis">
+      CommandTool Fields
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameter-substitution" class="md-nav__link">
+    <span class="md-ellipsis">
+      Parameter Substitution
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#commandresult" class="md-nav__link">
+    <span class="md-ellipsis">
+      CommandResult
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#using-newcommandtool" class="md-nav__link">
+    <span class="md-ellipsis">
+      Using NewCommandTool
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#environment-variables" class="md-nav__link">
+    <span class="md-ellipsis">
+      Environment Variables
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#mcp-tool-conversion" class="md-nav__link">
     <span class="md-ellipsis">
       MCP Tool Conversion
@@ -710,6 +770,52 @@
   
 </nav>
       
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../loader/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Loader
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../installer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Installer
+    
+  </span>
+  
+
+      </a>
     </li>
   
 
@@ -1317,6 +1423,66 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#commandtool" class="md-nav__link">
+    <span class="md-ellipsis">
+      CommandTool
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="CommandTool">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#commandtool-fields" class="md-nav__link">
+    <span class="md-ellipsis">
+      CommandTool Fields
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameter-substitution" class="md-nav__link">
+    <span class="md-ellipsis">
+      Parameter Substitution
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#commandresult" class="md-nav__link">
+    <span class="md-ellipsis">
+      CommandResult
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#using-newcommandtool" class="md-nav__link">
+    <span class="md-ellipsis">
+      Using NewCommandTool
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#environment-variables" class="md-nav__link">
+    <span class="md-ellipsis">
+      Environment Variables
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#mcp-tool-conversion" class="md-nav__link">
     <span class="md-ellipsis">
       MCP Tool Conversion
@@ -1525,11 +1691,121 @@
 <a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nb">string</span><span class="p">(</span><span class="nx">data</span><span class="p">),</span><span class="w"> </span><span class="kc">nil</span>
 <a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a><span class="p">}</span>
 </code></pre></div>
+<h2 id="commandtool">CommandTool<a class="headerlink" href="#commandtool" title="Permanent link">&para;</a></h2>
+<p><code>CommandTool</code> wraps CLI commands as Tool implementations. This enables SKILL.md-defined commands to be exposed as standard tools.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="kn">import</span><span class="w"> </span><span class="s">&quot;github.com/plexusone/omniskill/skill&quot;</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="nx">tool</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">skill</span><span class="p">.</span><span class="nx">CommandTool</span><span class="p">{</span>
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="w">    </span><span class="nx">ToolName</span><span class="p">:</span><span class="w">        </span><span class="s">&quot;search&quot;</span><span class="p">,</span>
+<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="w">    </span><span class="nx">ToolDescription</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Search the archive&quot;</span><span class="p">,</span>
+<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a><span class="w">    </span><span class="nx">Command</span><span class="p">:</span><span class="w">         </span><span class="s">&quot;notcrawl&quot;</span><span class="p">,</span>
+<a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a><span class="w">    </span><span class="nx">Args</span><span class="p">:</span><span class="w">            </span><span class="p">[]</span><span class="kt">string</span><span class="p">{</span><span class="s">&quot;search&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;{{query}}&quot;</span><span class="p">},</span>
+<a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a><span class="w">    </span><span class="nx">ToolParameters</span><span class="p">:</span><span class="w"> </span><span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="nx">skill</span><span class="p">.</span><span class="nx">Parameter</span><span class="p">{</span>
+<a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a><span class="w">        </span><span class="s">&quot;query&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nx">Type</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;string&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">Description</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Search query&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">Required</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">},</span>
+<a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a><span class="w">    </span><span class="p">},</span>
+<a id="__codelineno-11-11" name="__codelineno-11-11" href="#__codelineno-11-11"></a><span class="w">    </span><span class="nx">Timeout</span><span class="p">:</span><span class="w"> </span><span class="mi">30</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nx">time</span><span class="p">.</span><span class="nx">Second</span><span class="p">,</span>
+<a id="__codelineno-11-12" name="__codelineno-11-12" href="#__codelineno-11-12"></a><span class="p">}</span>
+<a id="__codelineno-11-13" name="__codelineno-11-13" href="#__codelineno-11-13"></a>
+<a id="__codelineno-11-14" name="__codelineno-11-14" href="#__codelineno-11-14"></a><span class="c1">// Call the tool</span>
+<a id="__codelineno-11-15" name="__codelineno-11-15" href="#__codelineno-11-15"></a><span class="nx">result</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">tool</span><span class="p">.</span><span class="nx">Call</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span><span class="w"> </span><span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">any</span><span class="p">{</span><span class="s">&quot;query&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;meeting notes&quot;</span><span class="p">})</span>
+<a id="__codelineno-11-16" name="__codelineno-11-16" href="#__codelineno-11-16"></a>
+<a id="__codelineno-11-17" name="__codelineno-11-17" href="#__codelineno-11-17"></a><span class="c1">// Result is a CommandResult</span>
+<a id="__codelineno-11-18" name="__codelineno-11-18" href="#__codelineno-11-18"></a><span class="nx">cmdResult</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">result</span><span class="p">.(</span><span class="nx">skill</span><span class="p">.</span><span class="nx">CommandResult</span><span class="p">)</span>
+<a id="__codelineno-11-19" name="__codelineno-11-19" href="#__codelineno-11-19"></a><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">cmdResult</span><span class="p">.</span><span class="nx">Stdout</span><span class="p">)</span>
+<a id="__codelineno-11-20" name="__codelineno-11-20" href="#__codelineno-11-20"></a><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;Exit code: %d\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">cmdResult</span><span class="p">.</span><span class="nx">ExitCode</span><span class="p">)</span>
+</code></pre></div>
+<h3 id="commandtool-fields">CommandTool Fields<a class="headerlink" href="#commandtool-fields" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ToolName</code></td>
+<td>Tool identifier</td>
+</tr>
+<tr>
+<td><code>ToolDescription</code></td>
+<td>Human-readable description</td>
+</tr>
+<tr>
+<td><code>Command</code></td>
+<td>Executable name or path</td>
+</tr>
+<tr>
+<td><code>Args</code></td>
+<td>Command arguments (supports <code>{{param}}</code> substitution)</td>
+</tr>
+<tr>
+<td><code>ToolParameters</code></td>
+<td>Input parameter definitions</td>
+</tr>
+<tr>
+<td><code>WorkingDir</code></td>
+<td>Working directory (default: current directory)</td>
+</tr>
+<tr>
+<td><code>Timeout</code></td>
+<td>Maximum execution time (zero = no timeout)</td>
+</tr>
+<tr>
+<td><code>Env</code></td>
+<td>Additional environment variables</td>
+</tr>
+</tbody>
+</table>
+<h3 id="parameter-substitution">Parameter Substitution<a class="headerlink" href="#parameter-substitution" title="Permanent link">&para;</a></h3>
+<p>Use <code>{{paramName}}</code> placeholders in <code>Args</code> to inject parameter values:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="nx">tool</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">skill</span><span class="p">.</span><span class="nx">CommandTool</span><span class="p">{</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="w">    </span><span class="nx">Command</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;gh&quot;</span><span class="p">,</span>
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="w">    </span><span class="nx">Args</span><span class="p">:</span><span class="w">    </span><span class="p">[]</span><span class="kt">string</span><span class="p">{</span><span class="s">&quot;issue&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;view&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;{{number}}&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;--repo&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;{{repo}}&quot;</span><span class="p">},</span>
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="w">    </span><span class="nx">ToolParameters</span><span class="p">:</span><span class="w"> </span><span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="nx">skill</span><span class="p">.</span><span class="nx">Parameter</span><span class="p">{</span>
+<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a><span class="w">        </span><span class="s">&quot;number&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nx">Type</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;integer&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">Required</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">},</span>
+<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a><span class="w">        </span><span class="s">&quot;repo&quot;</span><span class="p">:</span><span class="w">   </span><span class="p">{</span><span class="nx">Type</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;string&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">Required</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">},</span>
+<a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a><span class="w">    </span><span class="p">},</span>
+<a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a><span class="p">}</span>
+<a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a>
+<a id="__codelineno-12-10" name="__codelineno-12-10" href="#__codelineno-12-10"></a><span class="c1">// Calling with {&quot;number&quot;: 123, &quot;repo&quot;: &quot;user/repo&quot;} executes:</span>
+<a id="__codelineno-12-11" name="__codelineno-12-11" href="#__codelineno-12-11"></a><span class="c1">// gh issue view 123 --repo user/repo</span>
+</code></pre></div>
+<h3 id="commandresult">CommandResult<a class="headerlink" href="#commandresult" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="kd">type</span><span class="w"> </span><span class="nx">CommandResult</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="w">    </span><span class="nx">Stdout</span><span class="w">   </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:&quot;stdout&quot;`</span><span class="w">   </span><span class="c1">// Standard output</span>
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="w">    </span><span class="nx">Stderr</span><span class="w">   </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:&quot;stderr&quot;`</span><span class="w">   </span><span class="c1">// Standard error</span>
+<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="w">    </span><span class="nx">ExitCode</span><span class="w"> </span><span class="kt">int</span><span class="w">    </span><span class="s">`json:&quot;exit_code&quot;`</span><span class="w"> </span><span class="c1">// Exit code (0 = success)</span>
+<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a><span class="p">}</span>
+<a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a>
+<a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a><span class="c1">// String() returns stdout on success, stderr on failure</span>
+<a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">String</span><span class="p">())</span>
+</code></pre></div>
+<h3 id="using-newcommandtool">Using NewCommandTool<a class="headerlink" href="#using-newcommandtool" title="Permanent link">&para;</a></h3>
+<p>Helper function with common defaults (30 second timeout):</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="nx">tool</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">skill</span><span class="p">.</span><span class="nx">NewCommandTool</span><span class="p">(</span>
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="w">    </span><span class="s">&quot;list_files&quot;</span><span class="p">,</span>
+<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="w">    </span><span class="s">&quot;List files in a directory&quot;</span><span class="p">,</span>
+<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a><span class="w">    </span><span class="s">&quot;ls&quot;</span><span class="p">,</span>
+<a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a><span class="w">    </span><span class="p">[]</span><span class="kt">string</span><span class="p">{</span><span class="s">&quot;-la&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;{{path}}&quot;</span><span class="p">},</span>
+<a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a><span class="w">    </span><span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="nx">skill</span><span class="p">.</span><span class="nx">Parameter</span><span class="p">{</span>
+<a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a><span class="w">        </span><span class="s">&quot;path&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nx">Type</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;string&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">Description</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Directory path&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">Required</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">},</span>
+<a id="__codelineno-14-8" name="__codelineno-14-8" href="#__codelineno-14-8"></a><span class="w">    </span><span class="p">},</span>
+<a id="__codelineno-14-9" name="__codelineno-14-9" href="#__codelineno-14-9"></a><span class="p">)</span>
+</code></pre></div>
+<h3 id="environment-variables">Environment Variables<a class="headerlink" href="#environment-variables" title="Permanent link">&para;</a></h3>
+<p>Pass additional environment variables to commands:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="nx">tool</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">skill</span><span class="p">.</span><span class="nx">CommandTool</span><span class="p">{</span>
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="w">    </span><span class="nx">Command</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;my-tool&quot;</span><span class="p">,</span>
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="w">    </span><span class="nx">Args</span><span class="p">:</span><span class="w">    </span><span class="p">[]</span><span class="kt">string</span><span class="p">{</span><span class="s">&quot;run&quot;</span><span class="p">},</span>
+<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a><span class="w">    </span><span class="nx">Env</span><span class="p">:</span><span class="w">     </span><span class="p">[]</span><span class="kt">string</span><span class="p">{</span><span class="s">&quot;API_KEY=secret&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;DEBUG=true&quot;</span><span class="p">},</span>
+<a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a><span class="p">}</span>
+</code></pre></div>
 <h2 id="mcp-tool-conversion">MCP Tool Conversion<a class="headerlink" href="#mcp-tool-conversion" title="Permanent link">&para;</a></h2>
 <p>When skills are registered with an MCP server runtime, tools are automatically converted to MCP format:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="c1">// skill.Tool → mcp.Tool</span>
-<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="c1">// Parameters → JSON Schema (InputSchema)</span>
-<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="c1">// Handler → mcp.ToolHandler</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="c1">// skill.Tool → mcp.Tool</span>
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span class="c1">// Parameters → JSON Schema (InputSchema)</span>
+<a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a><span class="c1">// Handler → mcp.ToolHandler</span>
 </code></pre></div>
 <p>The conversion handles:</p>
 <ul>
@@ -1541,51 +1817,51 @@
 <h2 id="best-practices">Best Practices<a class="headerlink" href="#best-practices" title="Permanent link">&para;</a></h2>
 <h3 id="1-clear-names-and-descriptions">1. Clear Names and Descriptions<a class="headerlink" href="#1-clear-names-and-descriptions" title="Permanent link">&para;</a></h3>
 <p>Names should be verb-noun format. Descriptions should explain what the tool does:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="c1">// Good</span>
-<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="nx">skill</span><span class="p">.</span><span class="nx">NewTool</span><span class="p">(</span><span class="s">&quot;get_weather&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Get current weather conditions for a location&quot;</span><span class="p">,</span><span class="w"> </span><span class="o">...</span><span class="p">)</span>
-<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="nx">skill</span><span class="p">.</span><span class="nx">NewTool</span><span class="p">(</span><span class="s">&quot;send_email&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Send an email message to recipients&quot;</span><span class="p">,</span><span class="w"> </span><span class="o">...</span><span class="p">)</span>
-<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>
-<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a><span class="c1">// Bad</span>
-<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a><span class="nx">skill</span><span class="p">.</span><span class="nx">NewTool</span><span class="p">(</span><span class="s">&quot;weather&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Weather&quot;</span><span class="p">,</span><span class="w"> </span><span class="o">...</span><span class="p">)</span><span class="w">  </span><span class="c1">// Too vague</span>
-<a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a><span class="nx">skill</span><span class="p">.</span><span class="nx">NewTool</span><span class="p">(</span><span class="s">&quot;gw&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Gets weather&quot;</span><span class="p">,</span><span class="w"> </span><span class="o">...</span><span class="p">)</span><span class="w">  </span><span class="c1">// Cryptic name</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="c1">// Good</span>
+<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a><span class="nx">skill</span><span class="p">.</span><span class="nx">NewTool</span><span class="p">(</span><span class="s">&quot;get_weather&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Get current weather conditions for a location&quot;</span><span class="p">,</span><span class="w"> </span><span class="o">...</span><span class="p">)</span>
+<a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a><span class="nx">skill</span><span class="p">.</span><span class="nx">NewTool</span><span class="p">(</span><span class="s">&quot;send_email&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Send an email message to recipients&quot;</span><span class="p">,</span><span class="w"> </span><span class="o">...</span><span class="p">)</span>
+<a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a>
+<a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a><span class="c1">// Bad</span>
+<a id="__codelineno-17-6" name="__codelineno-17-6" href="#__codelineno-17-6"></a><span class="nx">skill</span><span class="p">.</span><span class="nx">NewTool</span><span class="p">(</span><span class="s">&quot;weather&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Weather&quot;</span><span class="p">,</span><span class="w"> </span><span class="o">...</span><span class="p">)</span><span class="w">  </span><span class="c1">// Too vague</span>
+<a id="__codelineno-17-7" name="__codelineno-17-7" href="#__codelineno-17-7"></a><span class="nx">skill</span><span class="p">.</span><span class="nx">NewTool</span><span class="p">(</span><span class="s">&quot;gw&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Gets weather&quot;</span><span class="p">,</span><span class="w"> </span><span class="o">...</span><span class="p">)</span><span class="w">  </span><span class="c1">// Cryptic name</span>
 </code></pre></div>
 <h3 id="2-validate-required-parameters">2. Validate Required Parameters<a class="headerlink" href="#2-validate-required-parameters" title="Permanent link">&para;</a></h3>
 <p>Check for required parameters before using them:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="kd">func</span><span class="p">(</span><span class="nx">ctx</span><span class="w"> </span><span class="nx">context</span><span class="p">.</span><span class="nx">Context</span><span class="p">,</span><span class="w"> </span><span class="nx">params</span><span class="w"> </span><span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">any</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="kt">any</span><span class="p">,</span><span class="w"> </span><span class="kt">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="w">    </span><span class="nx">name</span><span class="p">,</span><span class="w"> </span><span class="nx">ok</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">params</span><span class="p">[</span><span class="s">&quot;name&quot;</span><span class="p">].(</span><span class="kt">string</span><span class="p">)</span>
-<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">!</span><span class="nx">ok</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nx">name</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="kc">nil</span><span class="p">,</span><span class="w"> </span><span class="nx">errors</span><span class="p">.</span><span class="nx">New</span><span class="p">(</span><span class="s">&quot;name is required&quot;</span><span class="p">)</span>
-<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a><span class="w">    </span><span class="p">}</span>
-<a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a><span class="w">    </span><span class="c1">// ...</span>
-<a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a><span class="p">}</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="kd">func</span><span class="p">(</span><span class="nx">ctx</span><span class="w"> </span><span class="nx">context</span><span class="p">.</span><span class="nx">Context</span><span class="p">,</span><span class="w"> </span><span class="nx">params</span><span class="w"> </span><span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">any</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="kt">any</span><span class="p">,</span><span class="w"> </span><span class="kt">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a><span class="w">    </span><span class="nx">name</span><span class="p">,</span><span class="w"> </span><span class="nx">ok</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">params</span><span class="p">[</span><span class="s">&quot;name&quot;</span><span class="p">].(</span><span class="kt">string</span><span class="p">)</span>
+<a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">!</span><span class="nx">ok</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nx">name</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="kc">nil</span><span class="p">,</span><span class="w"> </span><span class="nx">errors</span><span class="p">.</span><span class="nx">New</span><span class="p">(</span><span class="s">&quot;name is required&quot;</span><span class="p">)</span>
+<a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-18-6" name="__codelineno-18-6" href="#__codelineno-18-6"></a><span class="w">    </span><span class="c1">// ...</span>
+<a id="__codelineno-18-7" name="__codelineno-18-7" href="#__codelineno-18-7"></a><span class="p">}</span>
 </code></pre></div>
 <h3 id="3-use-context">3. Use Context<a class="headerlink" href="#3-use-context" title="Permanent link">&para;</a></h3>
 <p>Respect context cancellation for long operations:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="kd">func</span><span class="p">(</span><span class="nx">ctx</span><span class="w"> </span><span class="nx">context</span><span class="p">.</span><span class="nx">Context</span><span class="p">,</span><span class="w"> </span><span class="nx">params</span><span class="w"> </span><span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">any</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="kt">any</span><span class="p">,</span><span class="w"> </span><span class="kt">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="w">    </span><span class="k">select</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="o">&lt;-</span><span class="nx">ctx</span><span class="p">.</span><span class="nx">Done</span><span class="p">():</span>
-<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="kc">nil</span><span class="p">,</span><span class="w"> </span><span class="nx">ctx</span><span class="p">.</span><span class="nx">Err</span><span class="p">()</span>
-<a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a><span class="w">    </span><span class="k">default</span><span class="p">:</span>
-<a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a><span class="w">    </span><span class="p">}</span>
-<a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a>
-<a id="__codelineno-14-8" name="__codelineno-14-8" href="#__codelineno-14-8"></a><span class="w">    </span><span class="c1">// Long operation...</span>
-<a id="__codelineno-14-9" name="__codelineno-14-9" href="#__codelineno-14-9"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">result</span><span class="p">,</span><span class="w"> </span><span class="kc">nil</span>
-<a id="__codelineno-14-10" name="__codelineno-14-10" href="#__codelineno-14-10"></a><span class="p">}</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="kd">func</span><span class="p">(</span><span class="nx">ctx</span><span class="w"> </span><span class="nx">context</span><span class="p">.</span><span class="nx">Context</span><span class="p">,</span><span class="w"> </span><span class="nx">params</span><span class="w"> </span><span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">any</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="kt">any</span><span class="p">,</span><span class="w"> </span><span class="kt">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a><span class="w">    </span><span class="k">select</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a><span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="o">&lt;-</span><span class="nx">ctx</span><span class="p">.</span><span class="nx">Done</span><span class="p">():</span>
+<a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="kc">nil</span><span class="p">,</span><span class="w"> </span><span class="nx">ctx</span><span class="p">.</span><span class="nx">Err</span><span class="p">()</span>
+<a id="__codelineno-19-5" name="__codelineno-19-5" href="#__codelineno-19-5"></a><span class="w">    </span><span class="k">default</span><span class="p">:</span>
+<a id="__codelineno-19-6" name="__codelineno-19-6" href="#__codelineno-19-6"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-19-7" name="__codelineno-19-7" href="#__codelineno-19-7"></a>
+<a id="__codelineno-19-8" name="__codelineno-19-8" href="#__codelineno-19-8"></a><span class="w">    </span><span class="c1">// Long operation...</span>
+<a id="__codelineno-19-9" name="__codelineno-19-9" href="#__codelineno-19-9"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">result</span><span class="p">,</span><span class="w"> </span><span class="kc">nil</span>
+<a id="__codelineno-19-10" name="__codelineno-19-10" href="#__codelineno-19-10"></a><span class="p">}</span>
 </code></pre></div>
 <h3 id="4-return-structured-results">4. Return Structured Results<a class="headerlink" href="#4-return-structured-results" title="Permanent link">&para;</a></h3>
 <p>Return maps or structs for rich results:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="c1">// Good - structured</span>
-<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="k">return</span><span class="w"> </span><span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">any</span><span class="p">{</span>
-<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="w">    </span><span class="s">&quot;success&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
-<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a><span class="w">    </span><span class="s">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="nx">processedData</span><span class="p">,</span>
-<a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a><span class="w">    </span><span class="s">&quot;metadata&quot;</span><span class="p">:</span><span class="w"> </span><span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">any</span><span class="p">{</span>
-<a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a><span class="w">        </span><span class="s">&quot;processed_at&quot;</span><span class="p">:</span><span class="w"> </span><span class="nx">time</span><span class="p">.</span><span class="nx">Now</span><span class="p">(),</span>
-<a id="__codelineno-15-7" name="__codelineno-15-7" href="#__codelineno-15-7"></a><span class="w">        </span><span class="s">&quot;count&quot;</span><span class="p">:</span><span class="w"> </span><span class="nb">len</span><span class="p">(</span><span class="nx">processedData</span><span class="p">),</span>
-<a id="__codelineno-15-8" name="__codelineno-15-8" href="#__codelineno-15-8"></a><span class="w">    </span><span class="p">},</span>
-<a id="__codelineno-15-9" name="__codelineno-15-9" href="#__codelineno-15-9"></a><span class="p">},</span><span class="w"> </span><span class="kc">nil</span>
-<a id="__codelineno-15-10" name="__codelineno-15-10" href="#__codelineno-15-10"></a>
-<a id="__codelineno-15-11" name="__codelineno-15-11" href="#__codelineno-15-11"></a><span class="c1">// Less useful - just a string</span>
-<a id="__codelineno-15-12" name="__codelineno-15-12" href="#__codelineno-15-12"></a><span class="k">return</span><span class="w"> </span><span class="s">&quot;done&quot;</span><span class="p">,</span><span class="w"> </span><span class="kc">nil</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="c1">// Good - structured</span>
+<a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a><span class="k">return</span><span class="w"> </span><span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">any</span><span class="p">{</span>
+<a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a><span class="w">    </span><span class="s">&quot;success&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<a id="__codelineno-20-4" name="__codelineno-20-4" href="#__codelineno-20-4"></a><span class="w">    </span><span class="s">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="nx">processedData</span><span class="p">,</span>
+<a id="__codelineno-20-5" name="__codelineno-20-5" href="#__codelineno-20-5"></a><span class="w">    </span><span class="s">&quot;metadata&quot;</span><span class="p">:</span><span class="w"> </span><span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">any</span><span class="p">{</span>
+<a id="__codelineno-20-6" name="__codelineno-20-6" href="#__codelineno-20-6"></a><span class="w">        </span><span class="s">&quot;processed_at&quot;</span><span class="p">:</span><span class="w"> </span><span class="nx">time</span><span class="p">.</span><span class="nx">Now</span><span class="p">(),</span>
+<a id="__codelineno-20-7" name="__codelineno-20-7" href="#__codelineno-20-7"></a><span class="w">        </span><span class="s">&quot;count&quot;</span><span class="p">:</span><span class="w"> </span><span class="nb">len</span><span class="p">(</span><span class="nx">processedData</span><span class="p">),</span>
+<a id="__codelineno-20-8" name="__codelineno-20-8" href="#__codelineno-20-8"></a><span class="w">    </span><span class="p">},</span>
+<a id="__codelineno-20-9" name="__codelineno-20-9" href="#__codelineno-20-9"></a><span class="p">},</span><span class="w"> </span><span class="kc">nil</span>
+<a id="__codelineno-20-10" name="__codelineno-20-10" href="#__codelineno-20-10"></a>
+<a id="__codelineno-20-11" name="__codelineno-20-11" href="#__codelineno-20-11"></a><span class="c1">// Less useful - just a string</span>
+<a id="__codelineno-20-12" name="__codelineno-20-12" href="#__codelineno-20-12"></a><span class="k">return</span><span class="w"> </span><span class="s">&quot;done&quot;</span><span class="p">,</span><span class="w"> </span><span class="kc">nil</span>
 </code></pre></div>
 
 

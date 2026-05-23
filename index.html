@@ -585,6 +585,52 @@
   
   
     <li class="md-nav__item">
+      <a href="concepts/loader/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Loader
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="concepts/installer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Installer
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="concepts/packs/" class="md-nav__link">
         
   
@@ -1191,12 +1237,15 @@
 <h2 id="package-structure">Package Structure<a class="headerlink" href="#package-structure" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>github.com/plexusone/omniskill
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>├── skill/       # Core Skill and Tool interfaces
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>├── registry/    # Skill registration and discovery
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>├── mcp/
-<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>│   ├── server/  # MCP server runtime
-<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>│   ├── client/  # MCP client for remote servers
-<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>│   └── oauth2/  # OAuth 2.1 authorization server
-<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>└── doc.go
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>├── loader/      # Skill loaders (SKILL.md, Go, etc.)
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>├── installer/   # Dependency installation management
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>├── registry/    # Skill registration and discovery
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>├── pack/        # Skill pack interface
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>├── mcp/
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>│   ├── server/  # MCP server runtime
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>│   ├── client/  # MCP client for remote servers
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>│   └── oauth2/  # OAuth 2.1 authorization server
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>└── doc.go
 </code></pre></div>
 <h2 id="getting-started">Getting Started<a class="headerlink" href="#getting-started" title="Permanent link">&para;</a></h2>
 <ul>
@@ -1208,6 +1257,8 @@
 <li><a href="concepts/overview/">Concepts Overview</a></li>
 <li><a href="concepts/skills/">Skills</a></li>
 <li><a href="concepts/tools/">Tools</a></li>
+<li><a href="concepts/loader/">Loader</a> - Loading SKILL.md and other formats</li>
+<li><a href="concepts/installer/">Installer</a> - Managing skill dependencies</li>
 <li><a href="concepts/registry/">Registry</a></li>
 </ul>
 
