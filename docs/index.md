@@ -73,7 +73,10 @@ func main() {
 ```
 github.com/plexusone/omniskill
 ├── skill/       # Core Skill and Tool interfaces
+├── loader/      # Skill loaders (SKILL.md, Go, etc.)
+├── installer/   # Dependency installation management
 ├── registry/    # Skill registration and discovery
+├── pack/        # Skill pack interface
 ├── mcp/
 │   ├── server/  # MCP server runtime
 │   ├── client/  # MCP client for remote servers
@@ -91,4 +94,6 @@ github.com/plexusone/omniskill
 - [Concepts Overview](concepts/overview.md)
 - [Skills](concepts/skills.md)
 - [Tools](concepts/tools.md)
+- [Loader](concepts/loader.md) - Loading SKILL.md and other formats
+- [Installer](concepts/installer.md) - Managing skill dependencies
 - [Registry](concepts/registry.md)

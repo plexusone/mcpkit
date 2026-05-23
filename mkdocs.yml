@@ -52,6 +52,8 @@ nav:
       - Overview: concepts/overview.md
       - Skills: concepts/skills.md
       - Tools: concepts/tools.md
+      - Loader: concepts/loader.md
+      - Installer: concepts/installer.md
       - Packs: concepts/packs.md
       - Registry: concepts/registry.md
   - MCP:
