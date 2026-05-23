@@ -207,9 +207,15 @@ func TestSkillInstaller_List(t *testing.T) {
 	globalDir := filepath.Join(tmpDir, "global")
 
 	// Create some skill directories
-	os.MkdirAll(filepath.Join(localDir, "skill1"), 0755)
-	os.MkdirAll(filepath.Join(localDir, "skill2"), 0755)
-	os.MkdirAll(filepath.Join(globalDir, "skill3"), 0755)
+	if err := os.MkdirAll(filepath.Join(localDir, "skill1"), 0755); err != nil {
+		t.Fatal(err)
+	}
+	if err := os.MkdirAll(filepath.Join(localDir, "skill2"), 0755); err != nil {
+		t.Fatal(err)
+	}
+	if err := os.MkdirAll(filepath.Join(globalDir, "skill3"), 0755); err != nil {
+		t.Fatal(err)
+	}
 
 	installer := &SkillInstaller{
 		SkillsDir: localDir,
@@ -242,8 +248,12 @@ func TestSkillInstaller_Uninstall(t *testing.T) {
 	localDir := filepath.Join(tmpDir, "local")
 
 	skillDir := filepath.Join(localDir, "test-skill")
-	os.MkdirAll(skillDir, 0755)
-	os.WriteFile(filepath.Join(skillDir, "SKILL.md"), []byte("# Test"), 0644)
+	if err := os.MkdirAll(skillDir, 0755); err != nil {
+		t.Fatal(err)
+	}
+	if err := os.WriteFile(filepath.Join(skillDir, "SKILL.md"), []byte("# Test"), 0600); err != nil {
+		t.Fatal(err)
+	}
 
 	installer := &SkillInstaller{
 		SkillsDir: localDir,
@@ -278,8 +288,12 @@ func TestSkillInstaller_AlreadyInstalled(t *testing.T) {
 	targetDir := filepath.Join(tmpDir, "installed")
 
 	// Create source and already-installed target
-	os.MkdirAll(sourceDir, 0755)
-	os.MkdirAll(filepath.Join(targetDir, "source-skill"), 0755)
+	if err := os.MkdirAll(sourceDir, 0755); err != nil {
+		t.Fatal(err)
+	}
+	if err := os.MkdirAll(filepath.Join(targetDir, "source-skill"), 0755); err != nil {
+		t.Fatal(err)
+	}
 
 	installer := &SkillInstaller{
 		SkillsDir: targetDir,

@@ -436,11 +436,13 @@ func copyDir(src, dst string) error {
 		}
 
 		// Copy file
+		//nolint:gosec // G122: User-provided skill source path for local installation
 		data, err := os.ReadFile(path)
 		if err != nil {
 			return err
 		}
 
+		//nolint:gosec // G703: Target path derived from user-provided skill destination
 		return os.WriteFile(targetPath, data, info.Mode())
 	})
 }

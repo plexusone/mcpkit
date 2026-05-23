@@ -88,6 +88,7 @@ func (t *CommandTool) Call(ctx context.Context, params map[string]any) (any, err
 	}
 
 	// Create command
+	//nolint:gosec // G204: Command is from trusted SKILL.md tool definition
 	cmd := exec.CommandContext(ctx, t.Command, args...)
 
 	if t.WorkingDir != "" {

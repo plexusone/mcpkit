@@ -348,6 +348,7 @@ func (s *Server) handleAuthorizationPost(w http.ResponseWriter, r *http.Request)
 	}
 	redirectURL.RawQuery = q.Encode()
 
+	//nolint:gosec // G710: Redirect URI validated by isValidRedirectURI against allowlist
 	http.Redirect(w, r, redirectURL.String(), http.StatusFound)
 }
 
@@ -766,6 +767,7 @@ func (s *Server) redirectWithError(w http.ResponseWriter, r *http.Request, redir
 	}
 	u.RawQuery = q.Encode()
 
+	//nolint:gosec // G710: Redirect URI validated by isValidRedirectURI against allowlist
 	http.Redirect(w, r, u.String(), http.StatusFound)
 }
 

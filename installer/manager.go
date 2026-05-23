@@ -150,6 +150,7 @@ func (m *Manager) InstallMissing(ctx context.Context, steps []loader.InstallStep
 
 // installGo installs a Go module using 'go install'.
 func (m *Manager) installGo(ctx context.Context, step loader.InstallStep) error {
+	//nolint:gosec // G204: Module path is from trusted SKILL.md install config
 	cmd := exec.CommandContext(ctx, "go", "install", step.Module)
 	cmd.Env = append(os.Environ(), m.Env...)
 	return m.runCommand(cmd)
@@ -157,6 +158,7 @@ func (m *Manager) installGo(ctx context.Context, step loader.InstallStep) error 
 
 // installNpm installs an npm package globally using 'npm install -g'.
 func (m *Manager) installNpm(ctx context.Context, step loader.InstallStep) error {
+	//nolint:gosec // G204: Module path is from trusted SKILL.md install config
 	cmd := exec.CommandContext(ctx, "npm", "install", "-g", step.Module)
 	cmd.Env = append(os.Environ(), m.Env...)
 	return m.runCommand(cmd)
@@ -170,6 +172,7 @@ func (m *Manager) installPip(ctx context.Context, step loader.InstallStep) error
 		pipCmd = "pip"
 	}
 
+	//nolint:gosec // G204: Module path is from trusted SKILL.md install config
 	cmd := exec.CommandContext(ctx, pipCmd, "install", step.Module)
 	cmd.Env = append(os.Environ(), m.Env...)
 	return m.runCommand(cmd)
@@ -177,6 +180,7 @@ func (m *Manager) installPip(ctx context.Context, step loader.InstallStep) error
 
 // installDocker pulls a Docker image.
 func (m *Manager) installDocker(ctx context.Context, step loader.InstallStep) error {
+	//nolint:gosec // G204: Module path is from trusted SKILL.md install config
 	cmd := exec.CommandContext(ctx, "docker", "pull", step.Module)
 	cmd.Env = append(os.Environ(), m.Env...)
 	return m.runCommand(cmd)
@@ -184,6 +188,7 @@ func (m *Manager) installDocker(ctx context.Context, step loader.InstallStep) er
 
 // installBrew installs a package using Homebrew.
 func (m *Manager) installBrew(ctx context.Context, step loader.InstallStep) error {
+	//nolint:gosec // G204: Module path is from trusted SKILL.md install config
 	cmd := exec.CommandContext(ctx, "brew", "install", step.Module)
 	cmd.Env = append(os.Environ(), m.Env...)
 	return m.runCommand(cmd)
