@@ -29,7 +29,9 @@ Unified skill infrastructure for AI agents in Go.
 
 OmniSkill provides a common interface for defining, registering, and invoking AI agent capabilities across multiple execution environments:
 
-- **skill/** - Core Skill and Tool interfaces
+- **skill/** - Core Skill and Tool interfaces, CommandTool for CLI wrapping
+- **loader/** - Skill loaders for SKILL.md markdown and Go formats
+- **installer/** - Dependency management for skill requirements
 - **pack/** - Skill pack interface for embedding markdown skills
 - **registry/** - Skill registration and discovery
 - **mcp/server/** - MCP server runtime with tools, prompts, resources
@@ -188,7 +190,9 @@ rt.RegisterSkill(mathSkill)  // Also registers with reg
 
 ```
 github.com/plexusone/omniskill
-├── skill/       # Core Skill and Tool interfaces
+├── skill/       # Core Skill and Tool interfaces, CommandTool
+├── loader/      # Skill loaders for SKILL.md and Go formats
+├── installer/   # Dependency management for skills
 ├── pack/        # Skill pack interface for markdown bundles
 ├── registry/    # Skill registration and discovery
 ├── mcp/

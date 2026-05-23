@@ -7,6 +7,33 @@
   "maintainers": ["plexusone"],
   "releases": [
     {
+      "version": "v0.8.0",
+      "date": "2026-05-23",
+      "highlights": [
+        { "description": "New `loader/` package for loading SKILL.md markdown skills" },
+        { "description": "New `installer/` package for managing skill dependencies" },
+        { "description": "`CommandTool` wrapper for exposing CLI commands as tools" }
+      ],
+      "added": [
+        { "description": "`loader.MarkdownSkill` parses OpenClaw SKILL.md files with YAML frontmatter and command discovery", "commit": "01b5234" },
+        { "description": "`loader.UnifiedLoader` discovers and loads skills from directories, preferring Go over markdown", "commit": "01b5234" },
+        { "description": "`loader.GoSkillRegistry` for registering native Go skill constructors by name", "commit": "01b5234" },
+        { "description": "`loader.Inspect()` and `loader.DiscoverSkills()` for skill directory introspection", "commit": "01b5234" },
+        { "description": "`installer.Manager` with support for go/npm/pip/docker/brew package managers", "commit": "dd9cd94" },
+        { "description": "`installer.SkillInstaller` for installing skills from git repos or local paths", "commit": "dd9cd94" },
+        { "description": "`installer.ParseSource()` parses git URLs, local paths, and refs (@version)", "commit": "dd9cd94" },
+        { "description": "`skill.CommandTool` wraps CLI commands as Tool implementations with parameter substitution", "commit": "8689655" },
+        { "description": "`skill.CommandResult` captures stdout, stderr, and exit code from command execution", "commit": "8689655" }
+      ],
+      "documentation": [
+        { "description": "Skill packs concept guide", "commit": "d0bb1c6" }
+      ],
+      "dependencies": [
+        { "description": "Bump github.com/modelcontextprotocol/go-sdk to v1.6.1", "commit": "d3f6c02" },
+        { "description": "Bump github.com/grokify/mogo to v0.74.5", "commit": "51aafe9" }
+      ]
+    },
+    {
       "version": "v0.7.0",
       "date": "2026-04-26",
       "highlights": [
