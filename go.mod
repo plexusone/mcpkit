@@ -4,7 +4,7 @@ go 1.26.0
 
 require (
 	github.com/grokify/mogo v0.74.4
-	github.com/modelcontextprotocol/go-sdk v1.6.0
+	github.com/modelcontextprotocol/go-sdk v1.6.1
 	golang.ngrok.com/ngrok v1.13.0
 )
 
