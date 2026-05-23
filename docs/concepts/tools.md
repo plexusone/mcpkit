@@ -170,6 +170,105 @@ func(ctx context.Context, params map[string]any) (any, error) {
 }
 ```
 
+## CommandTool
+
+`CommandTool` wraps CLI commands as Tool implementations. This enables SKILL.md-defined commands to be exposed as standard tools.
+
+```go
+import "github.com/plexusone/omniskill/skill"
+
+tool := &skill.CommandTool{
+    ToolName:        "search",
+    ToolDescription: "Search the archive",
+    Command:         "notcrawl",
+    Args:            []string{"search", "{{query}}"},
+    ToolParameters: map[string]skill.Parameter{
+        "query": {Type: "string", Description: "Search query", Required: true},
+    },
+    Timeout: 30 * time.Second,
+}
+
+// Call the tool
+result, err := tool.Call(ctx, map[string]any{"query": "meeting notes"})
+
+// Result is a CommandResult
+cmdResult := result.(skill.CommandResult)
+fmt.Println(cmdResult.Stdout)
+fmt.Printf("Exit code: %d\n", cmdResult.ExitCode)
+```
+
+### CommandTool Fields
+
+| Field | Description |
+|-------|-------------|
+| `ToolName` | Tool identifier |
+| `ToolDescription` | Human-readable description |
+| `Command` | Executable name or path |
+| `Args` | Command arguments (supports `{{param}}` substitution) |
+| `ToolParameters` | Input parameter definitions |
+| `WorkingDir` | Working directory (default: current directory) |
+| `Timeout` | Maximum execution time (zero = no timeout) |
+| `Env` | Additional environment variables |
+
+### Parameter Substitution
+
+Use `{{paramName}}` placeholders in `Args` to inject parameter values:
+
+```go
+tool := &skill.CommandTool{
+    Command: "gh",
+    Args:    []string{"issue", "view", "{{number}}", "--repo", "{{repo}}"},
+    ToolParameters: map[string]skill.Parameter{
+        "number": {Type: "integer", Required: true},
+        "repo":   {Type: "string", Required: true},
+    },
+}
+
+// Calling with {"number": 123, "repo": "user/repo"} executes:
+// gh issue view 123 --repo user/repo
+```
+
+### CommandResult
+
+```go
+type CommandResult struct {
+    Stdout   string `json:"stdout"`   // Standard output
+    Stderr   string `json:"stderr"`   // Standard error
+    ExitCode int    `json:"exit_code"` // Exit code (0 = success)
+}
+
+// String() returns stdout on success, stderr on failure
+fmt.Println(result.String())
+```
+
+### Using NewCommandTool
+
+Helper function with common defaults (30 second timeout):
+
+```go
+tool := skill.NewCommandTool(
+    "list_files",
+    "List files in a directory",
+    "ls",
+    []string{"-la", "{{path}}"},
+    map[string]skill.Parameter{
+        "path": {Type: "string", Description: "Directory path", Required: true},
+    },
+)
+```
+
+### Environment Variables
+
+Pass additional environment variables to commands:
+
+```go
+tool := &skill.CommandTool{
+    Command: "my-tool",
+    Args:    []string{"run"},
+    Env:     []string{"API_KEY=secret", "DEBUG=true"},
+}
+```
+
 ## MCP Tool Conversion
 
 When skills are registered with an MCP server runtime, tools are automatically converted to MCP format:
